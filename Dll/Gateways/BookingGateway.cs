@@ -26,7 +26,7 @@ namespace Dll.Gateways {
         }
 
         protected override Booking Update(HttpClient client, Booking element) {
-            HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}", element).Result;
+            HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}/{element.Id}", element).Result;
             return response.IsSuccessStatusCode ? response.Content.ReadAsAsync<Booking>().Result : null;
         }
 
