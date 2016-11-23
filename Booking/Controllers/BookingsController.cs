@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Booking.Authorization;
 using Dll;
 using Dll.Entities;
 using Dll.Gateways;
@@ -13,6 +14,7 @@ using Dll.Gateways;
 
 namespace Booking.Controllers
 {
+    [MyAuthorization]
     public class BookingsController : Controller
     {
         private IGateway<Dll.Entities.Booking, int> _bm = new DllFacade().GetBookingGateway();

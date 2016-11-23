@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using Booking.Authorization;
 using Booking.Models;
 using Dll;
 using Dll.Entities;
