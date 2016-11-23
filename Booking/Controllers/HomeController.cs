@@ -7,7 +7,7 @@ using Booking.Authorization;
 
 namespace Booking.Controllers
 {
-    [MyAuthorization]
+    [RequireUser]
     public class HomeController : Controller
     {
         public ActionResult Index()

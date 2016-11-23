@@ -22,17 +22,17 @@
                             <img src="https://www.easv.dk/images/logo.png" alt="Mountain View">
 
                             <hr class="colorgraph"><br>
-
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                                    @Html.TextBoxFor(m => m.Email, new {@class = "form-control", placeholder = "Username"})
                                     @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
                                 </div>
                             </div>
                             @*<input type="text" class="form-control" name="Username" placeholder="Username" required="" autofocus="" />*@
                             @*<input type="password" class="form-control" name="Password" placeholder="Password" required="" />*@
 
-                            @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+                            @Html.PasswordFor(m => m.Password, new {@class = "form-control", placeholder = "Password"})
                             @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
 
                             <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login</button>
@@ -52,9 +52,6 @@
                         </div>
                     </div>
                 </div>
-                
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-          
             }
         </section>
       </div>

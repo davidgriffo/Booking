@@ -58,6 +58,15 @@ namespace Dll.Gateways {
             }
         }
 
+        public User GetUserLoggedIn() {
+            using (var client = new HttpClient()) {
+                SetupClient(client);
+                AddAuthorizationHeader(client);
+
+                HttpResponseMessage response = client.GetAsync($"api/account/getuserloggedin").Result;
+                return response.IsSuccessStatusCode ? response.Content.ReadAsAsync<User>().Result : null;
+            }
+        }
 
         #region helpers
 

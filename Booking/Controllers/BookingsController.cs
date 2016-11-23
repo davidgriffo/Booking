@@ -14,7 +14,7 @@ using Dll.Gateways;
 
 namespace Booking.Controllers
 {
-    [MyAuthorization]
+    [RequireAdmin]
     public class BookingsController : Controller
     {
         private IGateway<Dll.Entities.Booking, int> _bm = new DllFacade().GetBookingGateway();

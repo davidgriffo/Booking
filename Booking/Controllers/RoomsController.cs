@@ -13,7 +13,7 @@ using Dll.Gateways;
 
 namespace Booking.Controllers
 {
-    [MyAuthorization]
+    [RequireAdmin]
     public class RoomsController : Controller
     {
         private IGateway<Room, int> _rm = new DllFacade().GetRoomGateway();

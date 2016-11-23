@@ -9,11 +9,11 @@ using System.Web.Routing;
 
 namespace Booking.Authorization
 {
-    public class MyAuthorization : AuthorizeAttribute
+    public class RequireUser : AuthorizeAttribute
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            if (httpContext.Session != null && httpContext.Session["token"] != null)
+            if (httpContext.Session?["token"] != null)
             {
                 return true;
             }

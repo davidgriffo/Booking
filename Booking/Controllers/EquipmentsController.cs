@@ -13,7 +13,7 @@ using Dll.Gateways;
 
 namespace Booking.Controllers
 {
-    [MyAuthorization]
+    [RequireAdmin]
     public class EquipmentsController : Controller
     {
 
