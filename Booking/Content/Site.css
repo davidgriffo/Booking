@@ -36,3 +36,20 @@ footer p {
     color: #FFFFFF;
 }
 
+#btnBook {
+    margin-top: 5%;
+    border-radius: 25px;
+    background-color: #00406f;
+    color: #FFFFFF;
+}
+
+#roomRow {
+    padding-top: 30px; 
+    padding-bottom: 20px; 
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    border: solid 0.1px; 
+    background-color: #eff1ee;
+}
+

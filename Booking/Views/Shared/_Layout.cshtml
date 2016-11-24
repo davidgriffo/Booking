@@ -34,10 +34,10 @@
             @Html.Partial("_LoginPartial")
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Rooms", "Index", "Rooms")</li>
-                    <li>@Html.ActionLink("Equipment", "Index", "Equipments")</li>
-                    <li>@Html.ActionLink("Bookings", "Index", "Bookings")</li>
+                    <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Rum", "Index", "Rooms")</li>
+                    <li>@Html.ActionLink("Udstyr", "Index", "Equipments")</li>
+                    <li>@Html.ActionLink("Bookinger", "Index", "Bookings")</li>
                 </ul>
             </div>
         </div>
@@ -45,7 +45,7 @@
     <div class="container body-content">
         @RenderBody()
         <footer>
-            <p>&copy; @DateTime.Now.Year - Your booking system</p>
+            <p>&copy; @DateTime.Now.Year - Pineapple Inc. | Alle rettigheder forbeholdes</p>
         </footer>
     </div>
 

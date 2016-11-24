@@ -5,11 +5,10 @@
 }
 
 
-<div class="jumbotron">
-    
+<div class="jumbotron" style="padding-bottom: 150px;">
+
     <img src="https://www.easv.dk/images/logo.png" alt="EASV Logo">
-    <h2>BOOK DIT LOKALE</h2>
-    <p class="lead">... før din kollega</p>
+    
 </div>
 
 <div class="row">
@@ -45,20 +44,28 @@
     </div>
 </div>
 
-@foreach (var test in Model.Room)
+@foreach (var item in Model.Room)
 {
-    <div class="row" style="padding: 5%;     margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 10px; border: solid 0.1px; background-color: #eff1ee;">
-        <div class="col-md-4">
-            Lokale
-            Beskrivelse
+    <div class="row" id="roomRow">
+        <div class="col-md-2">
+            <p><b>Lokale:</b> @item.Name</p>
+            <p><b>Afdeling:</b> @item.Name</p>
         </div>
         <div class="col-md-4">
-            Test
+            <p><b>Antal personer:</b> @item.Capacity</p>
+            <p><b>Beskrivelse:</b> @item.Description</p>
         </div>
         <div class="col-md-4">
-            Udstyr
+            <p><b>Udstyr:</b></p>
+            @foreach (var equipment in item.Equipment)
+            {
+                <p>@equipment.Name</p>
+            }
+        </div>
+        <div class="col-md-2">
+
+            <button id="btnBook" class="btn btn-info" type="button">Book - <span class="glyphicon glyphicon-calendar"></span> </button>
+
         </div>
     </div>
 }
