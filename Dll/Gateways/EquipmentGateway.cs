@@ -26,7 +26,7 @@ namespace Dll.Gateways {
         }
 
         protected override Equipment Update(HttpClient client, Equipment element) {
-            HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}", element).Result;
+            HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}/{element.Id}", element).Result;
             return response.IsSuccessStatusCode ? response.Content.ReadAsAsync<Equipment>().Result : null;
         }
 

@@ -26,7 +26,7 @@ namespace Dll.Gateways {
         }
 
         protected override Room Update(HttpClient client, Room element) {
-            HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}", element).Result;
+            HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}/{element.Id}", element).Result;
             return response.IsSuccessStatusCode ? response.Content.ReadAsAsync<Room>().Result : null;
         }
 
