@@ -4946,7 +4946,8 @@ a.list-group-item.active > .badge,
 }
 
 .jumbotron img {
-    float: right;
+    float: left;
+    height: 65px;
 }
 
 

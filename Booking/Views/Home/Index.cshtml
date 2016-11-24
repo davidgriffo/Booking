@@ -4,68 +4,68 @@
     ViewBag.Title = "Home Page";
 }
 
+<div class="container">
+    <div class="jumbotron" style="padding-bottom: 150px;">
+        <img src="~/images/easvsydvest-logo.png" />
 
-<div class="jumbotron" style="padding-bottom: 150px;">
+    </div>
 
-    <img src="https://www.easv.dk/images/logo.png" alt="EASV Logo">
-    
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group date">
+                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+            <div class="input-group date">
+                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="input-group date">
+                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="input-group date">
+                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input class="btn btn-ok" id="btnSearch" type="button" value="Søg.." />
+        </div>
+    </div>
+
+    @foreach (var item in Model.Room)
+    {
+        <div class="row" id="roomRow">
+            <div class="col-md-2">
+                <p><b>Lokale:</b> @item.Name</p>
+                <p><b>Afdeling:</b> @item.Name</p>
+            </div>
+            <div class="col-md-4">
+                <p><b>Antal personer:</b> @item.Capacity</p>
+                <p><b>Beskrivelse:</b> @item.Description</p>
+            </div>
+            <div class="col-md-4">
+                <p><b>Udstyr:</b></p>
+                @foreach (var equipment in item.Equipment)
+                {
+                    <p>@equipment.Name</p>
+                }
+            </div>
+            <div class="col-md-2">
+
+                <button id="btnBook" class="btn btn-info" type="button">Book - <span class="glyphicon glyphicon-calendar"></span> </button>
+
+            </div>
+        </div>
+    }
 </div>
-
-<div class="row">
-    <div class="col-md-3">
-        <div class="input-group date">
-            <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-        </div>
-
-    </div>
-    
-    <div class="col-md-3">
-        <div class="input-group date">
-            <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-        </div>
-    </div>
-    
-    <div class="col-md-3">
-        <div class="input-group date">
-            <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        </div>
-    </div>
-    
-    <div class="col-md-3">
-        <div class="input-group date">
-            <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-        </div>
-    </div>    
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <input class="btn btn-ok" id="btnSearch" type="button" value="Søg.." />
-    </div>
-</div>
-
-@foreach (var item in Model.Room)
-{
-    <div class="row" id="roomRow">
-        <div class="col-md-2">
-            <p><b>Lokale:</b> @item.Name</p>
-            <p><b>Afdeling:</b> @item.Name</p>
-        </div>
-        <div class="col-md-4">
-            <p><b>Antal personer:</b> @item.Capacity</p>
-            <p><b>Beskrivelse:</b> @item.Description</p>
-        </div>
-        <div class="col-md-4">
-            <p><b>Udstyr:</b></p>
-            @foreach (var equipment in item.Equipment)
-            {
-                <p>@equipment.Name</p>
-            }
-        </div>
-        <div class="col-md-2">
-
-            <button id="btnBook" class="btn btn-info" type="button">Book - <span class="glyphicon glyphicon-calendar"></span> </button>
-
-        </div>
-    </div>
-}
