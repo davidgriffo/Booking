@@ -27,3 +27,12 @@ textarea {
 footer p {
     text-align: center;
 }
+#btnSearch {
+    min-width: 100%;
+    height: 40px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: #00406f;
+    color: #FFFFFF;
+}
+
