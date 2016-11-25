@@ -10,6 +10,7 @@ namespace Dll.Entities
     {
         public int Id { get; set; }
         public String Name { get; set; }
+        public string Department { get; set; }
         public String Description { get; set; }
         public int Capacity { get; set; }
         public List<Equipment> Equipment { get; set; }

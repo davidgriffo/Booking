@@ -1,4 +1,4 @@
-﻿@model Booking.Models.RoomEquipmentViewModels
+﻿@model List<Dll.Entities.Room>
 
 @{
     ViewBag.Title = "Home Page";
@@ -43,12 +43,12 @@
         </div>
     </div>
 
-    @foreach (var item in Model.Room)
+    @foreach (var item in Model)
     {
         <div class="row" id="roomRow">
             <div class="col-md-2">
                 <p><b>Lokale:</b> @item.Name</p>
-                <p><b>Afdeling:</b> @item.Name</p>
+                <p><b>Afdeling:</b> @item.Department</p>
             </div>
             <div class="col-md-4">
                 <p><b>Antal personer:</b> @item.Capacity</p>

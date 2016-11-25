@@ -14,6 +14,7 @@ namespace Dll.Entities
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public bool IsAdmin { get; set; }
+        public bool IsSuperAdmin { get; set; }
 
     }
 }

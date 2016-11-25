@@ -19,13 +19,7 @@ namespace Booking.Controllers
 
         public ActionResult Index()
         {
-            var model = new RoomEquipmentViewModels
-            {
-                Equipments = _eg.Read(),
-                Room = _rg.Read()
-            };
-
-            return View(model);
+            return View(_rg.Read());
         }
 
         public ActionResult About()
