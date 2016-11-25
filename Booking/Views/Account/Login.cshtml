@@ -4,9 +4,6 @@
     ViewBag.Title = "Login";
 }
 
-@{
-    ViewBag.Title = "Log in";
-}
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
         <section id="loginForm">
@@ -25,14 +22,12 @@
                             @Html.ValidationSummary(true, "", new {@class = "text-danger"})
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    @Html.TextBoxFor(m => m.Email, new {@class = "form-control", placeholder = "Username"})
+                                    @Html.TextBoxFor(m => m.Email, new {@class = "form-control", placeholder = "E-mail"})
                                     @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
                                 </div>
                             </div>
-                            @*<input type="text" class="form-control" name="Username" placeholder="Username" required="" autofocus="" />*@
-                            @*<input type="password" class="form-control" name="Password" placeholder="Password" required="" />*@
 
-                            @Html.PasswordFor(m => m.Password, new {@class = "form-control", placeholder = "Password"})
+                            @Html.PasswordFor(m => m.Password, new {@class = "form-control", placeholder = "Adgangskode"})
                             @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
 
                             <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login</button>

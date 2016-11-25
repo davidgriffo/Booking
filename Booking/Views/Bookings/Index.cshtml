@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Booking</h2>
+<h2>Oversigt over bookinger</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Opret ny booking", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.ToDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Ændre", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detaljer", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Slet", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

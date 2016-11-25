@@ -1,13 +1,16 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Lucida Sans Unicode';
-    background-color: rgba(205, 206, 205, 0.47);
+    /*background-color: rgba(205, 206, 205, 0.47);*/
 }
 
 body p b {
     font-family: 'Lucida Sans Unicode';
     font-weight: bold;
+}
+
+body h2 {
+   font-family: 'CustomFont' !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -56,11 +59,11 @@ footer p {
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: 10px;
-    border: solid 0.1px; 
-    background-color: #eff1ee;
+    border: dotted 0.1px; 
+    background-color: #fbfbfb;
 }
 
 @font-face {
   font-family: CustomFont;
-  src: url('/fonts/CustomFont.ttf');
+  src: url('/fonts/Exo-Bold.otf');
 }

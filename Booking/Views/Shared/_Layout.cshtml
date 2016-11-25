@@ -27,36 +27,47 @@
     </script>
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Booking", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            @Html.Partial("_LoginPartial")
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Rum", "Index", "Rooms")</li>
-                    <li>@Html.ActionLink("Udstyr", "Index", "Equipments")</li>
-                    <li>@Html.ActionLink("Bookinger", "Index", "Bookings")</li>
-                </ul>
-            </div>
+    <div class="jumbotron" style="padding-bottom: 150px;">
+        <img src="~/images/easvsydvest-logo.png" />
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+
+<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        @Html.Partial("_LoginPartial")
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
+                <li>@Html.ActionLink("Rum", "Index", "Rooms")</li>
+                <li>@Html.ActionLink("Udstyr", "Index", "Equipments")</li>
+                <li>@Html.ActionLink("Bookinger", "Index", "Bookings")</li>
+            </ul>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Pineapple Inc. | Alle rettigheder forbeholdes</p>
-        </footer>
-    </div>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Pineapple Inc. | Alle rettigheder forbeholdes</p>
+    </footer>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>
