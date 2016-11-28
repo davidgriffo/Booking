@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking", "Booking\Booking.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dll", "Dll\Dll.csproj", "{D3E6EAFD-9878-4562-9A86-FFDF18B57567}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchTest", "SearchTest\SearchTest.csproj", "{2C219A1B-C677-41DD-B307-B1CBAA05D746}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Search", "Search\Search.csproj", "{0773C5FA-5428-4EB2-A533-FE2D53086758}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{D3E6EAFD-9878-4562-9A86-FFDF18B57567}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3E6EAFD-9878-4562-9A86-FFDF18B57567}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3E6EAFD-9878-4562-9A86-FFDF18B57567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C219A1B-C677-41DD-B307-B1CBAA05D746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C219A1B-C677-41DD-B307-B1CBAA05D746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C219A1B-C677-41DD-B307-B1CBAA05D746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C219A1B-C677-41DD-B307-B1CBAA05D746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0773C5FA-5428-4EB2-A533-FE2D53086758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0773C5FA-5428-4EB2-A533-FE2D53086758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0773C5FA-5428-4EB2-A533-FE2D53086758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0773C5FA-5428-4EB2-A533-FE2D53086758}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

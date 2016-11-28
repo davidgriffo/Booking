@@ -9,31 +9,34 @@ using Dll;
 using Dll.Entities;
 using Dll.Gateways;
 
-namespace Booking.Controllers
-{
+namespace Booking.Controllers {
     [RequireUser]
-    public class HomeController : Controller
-    {
+    public class HomeController : Controller {
         private IGateway<Room, int> _rg = new DllFacade().GetRoomGateway();
         private IGateway<Equipment, int> _eg = new DllFacade().GetEquipmentGateway();
 
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             return View(_rg.Read());
         }
 
-        public ActionResult About()
-        {
+        public ActionResult About() {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
-        {
+        public ActionResult Contact() {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
+
+
+        public ActionResult Search(string fromDate, string toDate, int amount) {
+
+
+            return View();
+        }
+
     }
 }
