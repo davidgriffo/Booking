@@ -346,6 +346,10 @@
       <Project>{d3e6eafd-9878-4562-9a86-ffdf18b57567}</Project>
       <Name>Dll</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Search\Search.csproj">
+      <Project>{0773c5fa-5428-4eb2-a533-fe2d53086758}</Project>
+      <Name>Search</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
