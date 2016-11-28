@@ -19,24 +19,5 @@ namespace Booking.Controllers {
             return View(_rg.Read());
         }
 
-        public ActionResult About() {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact() {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-
-        public ActionResult Search(string fromDate, string toDate, int amount) {
-
-
-            return View();
-        }
-
     }
 }

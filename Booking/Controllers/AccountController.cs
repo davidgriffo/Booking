@@ -28,10 +28,13 @@ namespace Booking.Controllers {
             if (ModelState.IsValid) {
                 bool response = _accountGateway.Login(model.Email, model.Password);
                 if (response) {
+                    
                     return RedirectToAction("Index", "Home");
                 } else
                     ModelState.AddModelError("", "Invalid login attempt!");
             }
+
+
 
             return View(model);
         }
@@ -65,6 +68,8 @@ namespace Booking.Controllers {
             if (ModelState.IsValid) {
                 bool response = _accountGateway.Logout();
             }
+
+
             return RedirectToAction("Index", "Home");
         }
     }

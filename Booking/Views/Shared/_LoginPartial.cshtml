@@ -4,8 +4,10 @@
     using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
+        
 
         <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Min profil", "Index", "Profile")</li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log ud</a></li>
         </ul>
     }

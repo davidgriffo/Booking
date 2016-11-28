@@ -1,0 +1,26 @@
+﻿@model Dll.Entities.Room
+@{
+    ViewBag.Title = "Index";
+}
+
+    <div class="col-md-6">
+        <h2>Valgte lokale</h2>
+        <p>Navn: @Model.Name</p>
+        <p>Afdeling: @Model.Department</p>
+        <p>Beskrivelse: @Model.Description</p>
+        <p>Antal personer: @Model.Capacity</p>
+        <p>Dato:</p>
+    </div>
+<div class="col-md-6">
+    <h2>Udstyr</h2>
+        @foreach (var item in @Model.Equipment)
+        {
+            <p>@item.Name</p>
+        }
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input class="btn btn-ok" id="btnSearch" type="button" value="Book.." />
+    </div>
+</div>
+
