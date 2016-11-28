@@ -56,7 +56,7 @@
                         <li>@Html.ActionLink("Mine bookinger", "Index", "Bookings")</li>
                         @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsSuperAdmin)
                         {
-                            <li>@Html.ActionLink("Rum", "Index", "Rooms")</li>
+                            <li>@Html.ActionLink("Lokaler", "Index", "Rooms")</li>
                             <li>@Html.ActionLink("Udstyr", "Index", "Equipments")</li>
                             <li>@Html.ActionLink("Bookinger", "Index", "Bookings")</li>
                             <li>@Html.ActionLink("Brugere", "Index", "Bookings")</li>
