@@ -11,6 +11,6 @@ namespace Booking.Models
     {
         public Room Room { get; set; }
         public List<Equipment> Equipments { get; set; }
-        public SelectList SelectList { get; set; }
+        public List<int> SelectedIds { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace Booking.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Department,Capacity")] Room room, List<int> equipment) {
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Department,Equipment,Capacity")] Room room, List<int> equipment) {
             if (ModelState.IsValid) {
                 room.Equipment = new List<Equipment>();
                 equipment?.ForEach(x => room.Equipment.Add(new Equipment {Id = x}));
@@ -72,20 +72,10 @@ namespace Booking.Controllers {
                 return HttpNotFound();
             }
 
-            var tempList = new List<SelectListItem>();
-            foreach (var e in equipment) {
-                foreach (var re in room.Equipment) {
-                    if (re.Id == e.Id) {
-                        tempList.Add(new SelectListItem {Value = e.Id.ToString(), Text = e.Name, Selected = true});
-                        break;
-                    }
-                }
-                tempList.Add(new SelectListItem {Value = e.Id.ToString(), Text = e.Name});
-            }
+            var tempList = new List<int>();
+            room.Equipment.ForEach(x => tempList.Add(x.Id));
 
-            var selectList = new SelectList(tempList);
-
-            return View(new RoomEquipmentViewModels {Equipments = equipment, Room = room, SelectList = selectList});
+            return View(new RoomEquipmentViewModels {Equipments = equipment, Room = room, SelectedIds = tempList});
         }
 
         // POST: Rooms/Edit/5
@@ -93,8 +83,10 @@ namespace Booking.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Capacity")] Room room) {
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Department,Capacity")] Room room, List<int> equipment) {
             if (ModelState.IsValid) {
+                room.Equipment = new List<Equipment>();
+                equipment?.ForEach(x => room.Equipment.Add(new Equipment { Id = x }));
                 _rm.Update(room);
 
                 return RedirectToAction("Index");
