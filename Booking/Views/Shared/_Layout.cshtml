@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Booking.Authorization
+@using Dll
+@using Dll.Entities
+@using Dll.Gateways
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,7 +14,6 @@
     @Scripts.Render("~/bundles/jquery")
     
     <link href="~/Content/select2.min.css" rel="stylesheet" />
-    @*<link href="~/Content/select2-bootstrap.min.css" rel="stylesheet" />*@
     <script src="~/Scripts/select2.min.js"></script>
 
     <script type = 'text/javascript' >
@@ -33,41 +36,52 @@
     </div>
     
     
-    
-    
-    
-    
-    
-
-<div class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+ 
+        <div class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                @Html.Partial("_LoginPartial")
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Mine bookinger", "Index", "Bookings")</li>
+                        @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsSuperAdmin)
+                        {
+                            <li>@Html.ActionLink("Rum", "Index", "Rooms")</li>
+                            <li>@Html.ActionLink("Udstyr", "Index", "Equipments")</li>
+                            <li>@Html.ActionLink("Bookinger", "Index", "Bookings")</li>
+                            <li>@Html.ActionLink("Brugere", "Index", "Bookings")</li>
+                        }
+                        
+                        @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsAdmin)
+                        {
+                            <li>@Html.ActionLink("Bookinger", "Index", "Bookings")</li>
+                        }
+                        
+                
+                        
+                   
+                    </ul>
+                </div>
+            </div>
         </div>
-        @Html.Partial("_LoginPartial")
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
-                <li>@Html.ActionLink("Rum", "Index", "Rooms")</li>
-                <li>@Html.ActionLink("Udstyr", "Index", "Equipments")</li>
-                <li>@Html.ActionLink("Bookinger", "Index", "Bookings")</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="container body-content">
-    @RenderBody()
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Pineapple Inc. | Alle rettigheder forbeholdes</p>
-    </footer>
-</div>
+   
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+        <div class="container body-content">
+            @RenderBody()
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Pineapple Inc. | Alle rettigheder forbeholdes</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>
