@@ -1,4 +1,4 @@
-﻿@model List<Dll.Entities.Room>
+﻿@model Booking.Models.IndexViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -9,30 +9,39 @@
     <form action="@Url.Action("Search", "Home")">
         <div class="row">
             <div class="col-md-3">
-                <div class="input-group date" data-provide="datepicker" data-date-format="mm/dd/yyyy">
-                    <input name="startDate" type="datetime" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                    <input name="startDate" type="datetime" class="form-control" placeholder="Start dato">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="input-group date" data-provide="datepicker" data-date-format="mm/dd/yyyy">
-                    <input name="endDate" type="datetime" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                    <input name="endDate" type="datetime" class="form-control" placeholder="Slut dato">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div class="input-group date">
-                    <input name="capacity" type="number" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input name="capacity" type="number" class="form-control" placeholder="Kapacitet">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div class="input-group date">
-                    <input name="equipment" type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    @Html.ListBox("selectedEquipment", new MultiSelectList(Model.Equipment, "Id", "Name"), new { @class = "js-example-basic-multiple js-states form-control", multiple = "multiple" })
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
             </div>
         </div>
-        
+        <script type="text/javascript">
+            $(".js-example-basic-multiple").select2({
+                placeholder: {text: "Udstyr"}
+            });
+        </script>
+
         <div class="row">
             <div class="col-md-12">
                 <input class="btn btn-ok" id="btnSearch" type="submit" value="Søg.." />
@@ -42,7 +51,7 @@
 
     
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Rooms)
     {
         <div class="row" id="roomRow">
             <div class="col-md-2">
