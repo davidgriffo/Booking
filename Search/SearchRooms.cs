@@ -55,18 +55,30 @@ namespace Search {
 
             var returnList = new List<Room>();
 
-            foreach (var room in rooms) {
-                if (!equipment.Except(room.Equipment).Any()) {
-                    returnList.Add(room);
-                }
+            var equipmentIdList = new List<int>();
+
+            //Tilf'jer id til liste med equipment
+            foreach (var eq in equipment) {
+                equipmentIdList.Add(eq.Id);
             }
 
-            //var returnList = new List<Room>();
-            //foreach (var room in rooms) {
-            //    if (room.Equipment.Any(x => equipment.Any(y => y.Id == x.Id))) {
-            //        returnList.Add(room);
-            //    }
-            //}
+            //Opretter en ny liste til hvert rum det equipment som er i rummet
+            foreach (var room in rooms) {
+
+                var roomEquipmentIdList = new List<int>();
+
+                //Tilf'jer id til liste med equiopment
+                foreach (var eq in room.Equipment) {
+                    roomEquipmentIdList.Add(eq.Id);
+                }
+
+
+                if (!equipmentIdList.Except(roomEquipmentIdList).Any()) {
+                    returnList.Add(room);
+                }
+
+            }
+
             return returnList;
         }
 

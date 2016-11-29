@@ -86,11 +86,12 @@ namespace SearchTest {
 
             var e1 = new Equipment {Id = 1, Name = "Projektor"};
             var e2 = new Equipment {Id = 2, Name = "Whiteboard"};
+            var e3 = new Equipment {Id = 3, Name = "Blackboard"};
 
             var r1 = new Room { Id = 1, Equipment = new List<Equipment> {e1, e2} };
             var r2 = new Room { Id = 2, Equipment =  new List<Equipment> {e1} };
             var r3 = new Room { Id = 3, Equipment = new List<Equipment> {e2} };
-            var r4 = new Room { Id = 4, Equipment = new List<Equipment>() };
+            var r4 = new Room { Id = 4, Equipment = new List<Equipment> {e3} };
 
             var roomsList = new List<Room> { r1, r2, r3, r4 };
 
