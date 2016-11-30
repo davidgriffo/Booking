@@ -25,7 +25,8 @@ namespace Dll.Gateways {
         }
 
         protected override User Update(HttpClient client, User element) {
-            throw new NotImplementedException();
+            HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}/{element.Id}", element).Result;
+            return response.IsSuccessStatusCode ? response.Content.ReadAsAsync<User>().Result : null;
         }
 
         protected override bool Delete(HttpClient client, string id) {
