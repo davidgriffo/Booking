@@ -76,21 +76,29 @@ namespace Booking.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Adgangskode")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Bekræft adgangskode")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "First name")]
+        [Display(Name = "Fornavn")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last name")]
+        [Display(Name = "Efternavn")]
         public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Tlf.")]
+        public string Phone { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        public string UserStatus { get; set; }
     }
 
     public class ResetPasswordViewModel
