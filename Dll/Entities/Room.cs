@@ -10,7 +10,7 @@ namespace Dll.Entities
     public class Room
     {
         public int Id { get; set; }
-        [DisplayName("Navn")]
+        [DisplayName("Lokale")]
         public String Name { get; set; }
         [DisplayName("Afdeling")]
         public string Department { get; set; }
