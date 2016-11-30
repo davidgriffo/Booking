@@ -37,7 +37,7 @@ namespace Booking.Controllers
                 Accepted = new List<User>(),
                 Invited = new List<User>()
             };
-            _bg.Create(booking);
+            var statement =_bg.Create(booking);
             return View();
         }
     }

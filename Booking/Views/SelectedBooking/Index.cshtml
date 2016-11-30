@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<form action="@Url.Action("BookRoom", "SelectedBooking")">
     <div class="col-md-6">
         <h2>Valgte lokale</h2>
         <p>Navn: @Model.Name</p>
@@ -10,33 +10,27 @@
         <p>Beskrivelse: @Model.Description</p>
         <p>Antal personer: @Model.Capacity</p>
         <h2>Dato</h2>
-    </div>
-<div class="col-md-6">
-    <h2>Udstyr</h2>
-    @foreach (var item in @Model.Equipment)
-    {
-        <p>@item.Name</p>
-    }
-</div>
-<div>
-    <form action="@Url.Action("BookRoom", "SelectedBooking")">
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
                 <input name="startDate" type="datetime" class="form-control" placeholder="Start dato">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
         </div>
-
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
                 <input name="endDate" type="datetime" class="form-control" placeholder="Slut dato">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
         </div>
-        <input type="hidden" name="roomId" value="@Model.Id">
-        <div class="row">
-            <input class="btn btn-ok" id="btnSearch" type="submit" value="Book.." />
-        </div>
-    </form>
-</div>
-
+    </div>
+    <div class="col-md-6">
+        <h2>Udstyr</h2>
+        @foreach (var item in @Model.Equipment) {
+            <p>@item.Name</p>
+        }
+    </div>
+    <input type="hidden" name="roomId" value="@Model.Id">
+    <div class="row">
+        <input class="btn btn-ok" id="btnSearch" type="submit" value="Book.." />
+    </div>
+</form>
