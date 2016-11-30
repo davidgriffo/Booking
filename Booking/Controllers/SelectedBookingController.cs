@@ -37,7 +37,36 @@ namespace Booking.Controllers
                 Accepted = new List<User>(),
                 Invited = new List<User>()
             };
-            var createdBooking =_bg.Create(booking);
+
+            bool isAvailible = true;
+            Dll.Entities.Booking createdBooking;
+
+            foreach (var bookingToCheck in _bg.Read()) {
+                if (bookingToCheck.Room.Id != roomId) {
+                    continue;
+                }
+
+                //CHECK AVAILIBILITY HERE
+                if (bookingToCheck.ToDate <= endDateConverted && bookingToCheck.ToDate >= startDateConverted) {
+                    isAvailible = false;
+                    break;
+                } else if (bookingToCheck.FromDate <= endDateConverted && bookingToCheck.FromDate >= startDateConverted) {
+                    isAvailible = false;
+                    break;
+                } else if (bookingToCheck.FromDate <= startDateConverted && bookingToCheck.ToDate >= endDateConverted) {
+                    isAvailible = false;
+                    break;
+                }
+            }
+            if (isAvailible) {
+                createdBooking = _bg.Create(booking);
+            }
+            else
+            {
+                createdBooking = null;
+            }
+
+            
             return View(createdBooking);
         }
     }
