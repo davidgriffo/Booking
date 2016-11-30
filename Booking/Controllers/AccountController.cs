@@ -39,30 +39,7 @@ namespace Booking.Controllers {
             return View(model);
         }
 
-        //
-        // GET: /Account/Register
-        public ActionResult Register() {
-            return View();
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterViewModel model) {
-            if (ModelState.IsValid) {
-                User user = new User {Email = model.Email, UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName};
-                bool response = _accountGateway.Register(user, model.Password);
-
-                if (response) {
-                    _accountGateway.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home");
-                } else
-                    ModelState.AddModelError("", "Error registering new user");
-            }
-
-            return View(model);
-        }
+      
 
         public ActionResult Logout() {
             if (ModelState.IsValid) {
