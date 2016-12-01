@@ -11,6 +11,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+
     
     <link href="~/Content/select2.min.css" rel="stylesheet" />
     <script src="~/Scripts/select2.min.js"></script>
@@ -81,7 +82,8 @@
                 <p>&copy; @DateTime.Now.Year - Pineapple Inc. | Alle rettigheder forbeholdes</p>
             </footer>
         </div>
-
+    
+    
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
