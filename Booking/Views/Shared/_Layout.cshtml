@@ -53,7 +53,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Mine bookinger", "Index", "Bookings", new {new MyBookingViewModel().UserBookings()})</li>
+                        <li>@Html.ActionLink("Mine bookinger", "Index", "Bookings")</li>
                         @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsSuperAdmin)
                         {
                             <li>@Html.ActionLink("Lokaler", "Index", "Rooms")</li>

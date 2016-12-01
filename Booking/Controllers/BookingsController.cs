@@ -14,15 +14,29 @@ using Dll.Gateways;
 
 namespace Booking.Controllers
 {
-    [RequireAdmin]
+    [RequireUser]
     public class BookingsController : Controller
     {
         private IGateway<Dll.Entities.Booking, int> _bm = new DllFacade().GetBookingGateway();
+        private IAccountGateway _ag = new DllFacade().GetAccountGateway();
 
         // GET: Bookings
         public ActionResult Index()
         {
-            return View(_bm.Read());
+            if (_ag.GetUserLoggedIn().IsSuperAdmin)
+            {
+                return View(_bm.Read());
+            }
+
+            List<Dll.Entities.Booking> bookings = new List<Dll.Entities.Booking>();
+
+            foreach (var booking in _bm.Read()) {
+                if (booking.Creator.Id == _ag.GetUserLoggedIn().Id) {
+                    bookings.Add(booking);
+                }
+            }
+
+            return View(bookings);
         }
 
         // GET: Bookings/Details/5
@@ -38,7 +52,12 @@ namespace Booking.Controllers
             {
                 return HttpNotFound();
             }
-            return View(booking);
+            if (_ag.GetUserLoggedIn().IsSuperAdmin) {
+                return View(booking);
+            } else if (_ag.GetUserLoggedIn().Id == booking.Creator.Id) {
+                return View(booking);
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: Bookings/Create
@@ -77,7 +96,12 @@ namespace Booking.Controllers
             {
                 return HttpNotFound();
             }
-            return View(booking);
+            if (_ag.GetUserLoggedIn().IsSuperAdmin) {
+                return View(booking);
+            } else if (_ag.GetUserLoggedIn().Id == booking.Creator.Id) {
+                return View(booking);
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: Bookings/Edit/5
@@ -110,7 +134,13 @@ namespace Booking.Controllers
             {
                 return HttpNotFound();
             }
-            return View(booking);
+            if (_ag.GetUserLoggedIn().IsSuperAdmin) {
+                return View(booking);
+            } else if (_ag.GetUserLoggedIn().Id == booking.Creator.Id)
+            {
+                return View(booking);
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: Bookings/Delete/5
