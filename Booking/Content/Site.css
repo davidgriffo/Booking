@@ -64,6 +64,10 @@ footer p {
     border: dotted 0.1px; 
     background-color: #fbfbfb;
 }
+#btnLogIn {
+    background-color: #00406f;
+    color: #FFFFFF;
+}
 
 @font-face {
   font-family: CustomFont;
