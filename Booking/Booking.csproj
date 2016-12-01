@@ -184,6 +184,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookingViewModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\MyBookingViewModel.cs" />
     <Compile Include="Models\RoomEquipmentViewModels.cs" />
     <Compile Include="Models\UsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -333,9 +334,11 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Bookings\UserBooking.cshtml" />
+    <Content Include="Views\Home\MyBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\MyBooking\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

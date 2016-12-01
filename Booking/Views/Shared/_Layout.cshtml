@@ -1,4 +1,5 @@
 ﻿@using Booking.Authorization
+@using Booking.Models
 @using Dll
 @using Dll.Entities
 @using Dll.Gateways
@@ -52,7 +53,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Mine bookinger", "Index", "Bookings")</li>
+                        <li>@Html.ActionLink("Mine bookinger", "Index", "Bookings", new {new MyBookingViewModel().UserBookings()})</li>
                         @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsSuperAdmin)
                         {
                             <li>@Html.ActionLink("Lokaler", "Index", "Rooms")</li>
