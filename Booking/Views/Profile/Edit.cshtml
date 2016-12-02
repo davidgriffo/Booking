@@ -5,10 +5,11 @@
 
 <h2>Ændre brugeroplysninger</h2>
 
-@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new {
+@using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new {
     @class = "form-horizontal",
     role = "form"
 })) {
+    @Html.HiddenFor(m => m.Id)
     @Html.AntiForgeryToken()
     <h4>Udfyld nedenstående oplysninger</h4>
     <hr />
@@ -55,28 +56,11 @@
        })
         </div>
     </div>
-
-    @Html.HiddenFor(m => m.Id)
-    <div class="form-group">
-        @Html.Label("Status", new {
-       @class = "col-md-2 control-label"
-   })
-        <div class="col-md-10">
-            @Html.DropDownList("userStatus", new List<SelectListItem> { new SelectListItem { Value = "0", Text = "Bruger" }, new SelectListItem { Value = "1", Text = "Administrator" }, new SelectListItem { Value = "2", Text = "Super administrator" } }, new {
-           @class = "form-control"
-       })
-        </div>
-    </div>
-
-
-
-
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Gem" />
-        </div>
     </div>
+</div>
 }
 
 @section Scripts {

@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Booking.Authorization;
 using Booking.Models;
 using Dll;
 using Dll.Entities;
 using Dll.Gateways;
 
 namespace Booking.Controllers {
+    [RequireAdmin]
     public class UsersController : Controller {
         private readonly IGateway<User, String> _userGateway = new DllFacade().GetUserGateway();
         private readonly IAccountGateway _accountGateway = new DllFacade().GetAccountGateway();
