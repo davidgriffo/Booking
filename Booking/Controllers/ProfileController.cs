@@ -30,7 +30,7 @@ namespace Booking.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, FirstName, LastName, Email, PhoneNumber")]User user) {
+        public ActionResult Edit([Bind(Include = "Id, FirstName, LastName, Email, PhoneNumber, isAdmin, isSuperAdmin")]User user) {
             if (ModelState.IsValid)
             {
                 var updatedUser = _userGateway.Update(user);
