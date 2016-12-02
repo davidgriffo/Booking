@@ -11,5 +11,6 @@ namespace Dll.Gateways {
         bool Register(User user, string password);
         bool Logout();
         User GetUserLoggedIn();
+        bool ChangePassword(string oldPassword, string newPassword);
     }
 }

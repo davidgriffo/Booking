@@ -13,8 +13,8 @@
 </div>
 <div class="col-md-6">
     <h2>Genveje</h2>
-    
-    <li>@Html.ActionLink("Rediger mine oplysninger", "Edit", "Profile")</li>
-  
+    <li><a href="@Url.Action("ChangeInfo", "Profile")">Ændre informationer</a></li>
+    <li><a href="@Url.Action("ChangePassword", "Profile")">Skift adgangskode</a></li>
+    <li><a href="@Url.Action("ViewBookings", "Profile")">Mine bookinger</a></li>
 </div>
 <div class="row"></div>

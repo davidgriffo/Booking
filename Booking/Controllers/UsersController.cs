@@ -23,21 +23,6 @@ namespace Booking.Controllers {
             return View(model);
         }
 
-        public ActionResult Edit(string id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var user = _userGateway.Read(id);
-
-
-            if (user == null) {
-                return HttpNotFound();
-            }
-
-            return View(user);
-        }
-
         public ActionResult Details() {
             return View();
         }
@@ -86,10 +71,26 @@ namespace Booking.Controllers {
             return View(model);
         }
 
+        public ActionResult Edit(string id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = _userGateway.Read(id);
+
+
+            if (user == null) {
+                return HttpNotFound();
+            }
+
+            return View(user);
+        }
+
         // POST: /Account/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, FirstName, LastName, Email, PhoneNumber")]User user, string userStatus) {
+        public ActionResult Edit([Bind(Include = "Id, FirstName, LastName, Email, PhoneNumber")] User user,
+            string userStatus) {
             if (ModelState.IsValid) {
                 if (userStatus.Equals("1")) {
                     user.IsAdmin = true;

@@ -7,16 +7,15 @@ using System.Web.Routing;
 using Dll;
 
 namespace Booking.Authorization {
-    public class RequireAdmin : AuthorizeAttribute {
+    public class RequireSuperAdmin : AuthorizeAttribute {
         protected override bool AuthorizeCore(HttpContextBase httpContext) {
             //if user is admin we return true
             var user = new DllFacade().GetAccountGateway().GetUserLoggedIn();
-            return user.IsAdmin || user.IsSuperAdmin;
+            return user.IsSuperAdmin;
         }
-
+        
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext) {
-            filterContext.Result =
-                new RedirectToRouteResult(new RouteValueDictionary(new {controller = "Home", action = "Index"}));
+            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Home", action = "Index" }));
         }
     }
 }

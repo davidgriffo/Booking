@@ -40,16 +40,14 @@ namespace Booking.Controllers {
             }
             if (selectedEquipment != null && selectedEquipment.Count > 0) {
                 var equipment = new List<Equipment>();
-                selectedEquipment.ForEach(x => equipment.Add(new Equipment { Id = x }));
+                selectedEquipment.ForEach(x => equipment.Add(new Equipment {Id = x}));
 
                 allRooms = searcher.CheckEquipment(allRooms, equipment);
             }
 
 
-
-            var viewModel = new IndexViewModel { Rooms = allRooms, Equipment = _eg.Read() };
+            var viewModel = new IndexViewModel {Rooms = allRooms, Equipment = _eg.Read()};
             return View("Index", viewModel);
         }
-
     }
 }
