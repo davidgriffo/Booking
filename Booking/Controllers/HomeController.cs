@@ -24,25 +24,21 @@ namespace Booking.Controllers {
             return View(viewModel);
         }
 
-        public ActionResult Search(string startDate, string endDate, int? capacity, List<int> selectedEquipment)
-        {
+        public ActionResult Search(string startDate, string endDate, int? capacity, List<int> selectedEquipment) {
             var searcher = new SearchRooms();
 
             var allRooms = _rg.Read();
-            if (capacity != null && capacity > 0)
-            {
+            if (capacity != null && capacity > 0) {
                 allRooms = searcher.CheckCapacity(allRooms, capacity.Value);
             }
-            if (!startDate.IsNullOrWhiteSpace() && !endDate.IsNullOrWhiteSpace())
-            {
+            if (!startDate.IsNullOrWhiteSpace() && !endDate.IsNullOrWhiteSpace()) {
                 DateTimeFormatInfo dk = new CultureInfo("da-DK", false).DateTimeFormat;
                 var startDateTime = Convert.ToDateTime(startDate, dk);
                 var endDateTime = Convert.ToDateTime(endDate, dk);
 
                 allRooms = searcher.CheckAvailibility(allRooms, _bg.Read(), startDateTime, endDateTime);
             }
-            if (selectedEquipment != null && selectedEquipment.Count > 0)
-            {
+            if (selectedEquipment != null && selectedEquipment.Count > 0) {
                 var equipment = new List<Equipment>();
                 selectedEquipment.ForEach(x => equipment.Add(new Equipment {Id = x}));
 
@@ -50,10 +46,8 @@ namespace Booking.Controllers {
             }
 
 
-
             var viewModel = new IndexViewModel {Rooms = allRooms, Equipment = _eg.Read()};
             return View("Index", viewModel);
         }
-
     }
 }

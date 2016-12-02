@@ -1,27 +1,28 @@
 ﻿(function () {
 
-    var url = "http://roomsrest.azurewebsites.net/api/Room";
+    var url = "http://roomsrest.azurewebsites.net/api/Room/Search";
     var element = $("#test1");
     var ajax = null;
 
-    $(".searchTarget").change(function () {
-        if (ajax != null) {
-            ajax.abort();
-        };
-        var data = {
-            startDate: $("#startDate").val(),
-            endDate: $("#endDate").val(),
-            department: $("#department").val(),
-            capacity: $("#capacity").val(),
-            equipment: $("#equipment").val()
-            
-        }
-        element.empty();
-        setRow(data);
+    $( ".searchTarget .datepicker, .textinput" ).change(function() {
+            if (ajax != null) {
+                ajax.abort();
+            };
+            var data = {
+                startDate: $("#startDate").val(),
+                endDate: $("#endDate").val(),
+                department: $("#department").val(),
+                capacity: $("#capacity").val(),
+                equipment: $("#equipment").val()
+
+            }
+            element.empty();
+            setRow(data);
     });
 
+
     function setRow(searchData) {
-        ajax = $.getJSON(url, {}).done(function (json) {
+        ajax = $.getJSON(url + '?startDate=' + searchData.startDate + '&endDate=' + searchData.endDate + '&capacity=' + searchData.capacity, {}).done(function (json) {
 
             //Convert the data to an json object.
             var data = json;
@@ -36,7 +37,7 @@
                     });
 
                 element.append(
-                    '<div class="row" id="roomRow"><div class="col-md-2"><p><b>Lokale:</b>' + value.Name + '</p><p><b>Afdeling:</b> ' + value.Department + '</p></div><div class="col-md-4"><p><b>Antal personer:</b>' + value.Capacity + '</p><p><b>Beskrivelse:</b>' + value.Description + '</p></div><div class="col-md-4"><p><b>Udstyr:</b>' + item + '</p><div class="col-md-2"></div></div>'
+                    '<div class="row" id="roomRow"><div class="col-md-2"><p><b>Lokale:</b>' + value.Name + '</p><p><b>Afdeling:</b> ' + value.Department + '</p></div><div class="col-md-4"><p><b>Antal personer:</b>' + value.Capacity + '</p><p><b>Beskrivelse:</b>' + value.Description + '</p></div><div class="col-md-4"><p><b>Udstyr:</b>' + item + '</p></div><div class="col-md-2">  <a class="glyphicon glyphicon-calendar" href="/SelectedBooking/Index/'+ value.Id +'" id="btnBook"> </a>    </div>'
             );
             });
 

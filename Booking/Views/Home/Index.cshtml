@@ -9,15 +9,15 @@
     <form action="@Url.Action("Search", "Home")">
         <div class="row">
             <div class="col-md-6">
-                <div class="input-group date searchTarget" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="startDate">
-                    <input name="startDate" type="datetime" class="form-control" placeholder="Start dato">
+                <div class="input-group date searchTarget" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                    <input name="startDate" type="text" class="form-control searchTarget datepicker" placeholder="Start dato" id="startDate">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="input-group date searchTarget" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="endDate">
-                    <input name="endDate" type="datetime" class="form-control" placeholder="Slut dato">
+                <div class="input-group date searchTarget" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                    <input name="endDate" type="text" class="form-control searchTarget datepicker" placeholder="Slut dato" id="endDate">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </div>
@@ -33,7 +33,7 @@
 
             <div class="col-md-3">
                 <div class="input-group">
-                    <input name="capacity" type="number" class="form-control searchTarget" placeholder="Kapacitet" id="capacity">
+                    <input name="capacity" type="number" class="form-control searchTarget textinput" placeholder="Kapacitet" id="capacity">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 </div>
             </div>
@@ -56,13 +56,13 @@
             });
         </script>
 
-        <div class="row">
+        @*<div class="row">
             <div class="col-md-12">
                 <input class="btn btn-ok" id="btnSearch" type="submit" value="Søg.." />
             </div>
-        </div>
+        </div>*@
     </form>
-
+    <hr class="colorgraph"/>
     
     <div class="container-content" id="test1">
         @foreach (var item in Model.Rooms)
