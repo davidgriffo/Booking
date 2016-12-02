@@ -9,11 +9,11 @@
             ajax.abort();
         };
         var data = {
-            startDate: $("#startDate").value,
-            endDate: $("#endDate").value,
-            department: $("#department").value,
-            capacity: $("#capacity").value,
-            equipment: $("#equipment").value
+            startDate: $("#startDate").val(),
+            endDate: $("#endDate").val(),
+            department: $("#department").val(),
+            capacity: $("#capacity").val(),
+            equipment: $("#equipment").val()
             
         }
         element.empty();
