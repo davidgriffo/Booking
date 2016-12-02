@@ -68,6 +68,16 @@ namespace Dll.Gateways {
             }
         }
 
+        public bool ChangePassword(string oldPassword, string newPassword) {
+            using (var client = new HttpClient()) {
+                SetupClient(client);
+                AddAuthorizationHeader(client);
+
+                HttpResponseMessage response = client.PostAsJsonAsync($"api/account/ChangePassword", new Tuple<string, string>(oldPassword, newPassword)).Result;
+                return response.IsSuccessStatusCode;
+            }
+        }
+
         #region helpers
 
         private void SetupClient(HttpClient client) {

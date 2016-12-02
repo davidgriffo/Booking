@@ -40,7 +40,7 @@
 
             <div class="col-md-6">
                 <div class="input-group">
-                    @Html.ListBox("selectedEquipment", new MultiSelectList(Model.Equipment, "Id", "Name"), new {@class = "searchTarget js-example-basic-multiple js-states form-control", id = "equipment", multiple = "multiple"})
+                    @Html.ListBox("selectedEquipment", new MultiSelectList(Model.Equipment, "Id", "Name"), new {@class = "searchTarget multiDrop js-states form-control textinput", id = "equipment", multiple = "multiple"})
                     <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
             </div>
@@ -51,8 +51,8 @@
 
         
         <script type="text/javascript">
-            $(".js-example-basic-multiple").select2({
-                placeholder: {text: "Udstyr"}
+            $(".multiDrop").select2({
+                placeholder: { text: "Udstyr" }
             });
         </script>
 
@@ -62,7 +62,8 @@
             </div>
         </div>*@
     </form>
-    <hr class="colorgraph"/>
+
+    <hr/>
     
     <div class="container-content" id="test1">
         @foreach (var item in Model.Rooms)
@@ -95,6 +96,8 @@
         }
     </div>
 </div>
+
+<div id="tokenDiv" data-value="@HttpContext.Current.Session["token"]"></div>
 
 @section scripts
 {
