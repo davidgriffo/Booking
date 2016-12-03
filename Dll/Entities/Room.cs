@@ -13,7 +13,7 @@ namespace Dll.Entities
         [DisplayName("Lokale")]
         public String Name { get; set; }
         [DisplayName("Afdeling")]
-        public string Department { get; set; }
+        public Department Department { get; set; }
         [DisplayName("Beskrivelse")]
         public String Description { get; set; }
         [DisplayName("Antal personer")]

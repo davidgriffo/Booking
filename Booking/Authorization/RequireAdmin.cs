@@ -11,7 +11,10 @@ namespace Booking.Authorization {
         protected override bool AuthorizeCore(HttpContextBase httpContext) {
             //if user is admin we return true
             var user = new DllFacade().GetAccountGateway().GetUserLoggedIn();
-            return user.IsAdmin || user.IsSuperAdmin;
+            if (user != null) {
+                return user.IsAdmin || user.IsSuperAdmin;
+            }
+            return false;
         }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext) {

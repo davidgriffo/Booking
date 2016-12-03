@@ -26,7 +26,7 @@
         <div class="row" id="searchInputRow">
             <div class="col-md-3">
                 <div class="input-group">
-                    <input name="department" type="text" class="form-control searchTarget" placeholder="Afdeling" id="department">
+                    @Html.DropDownList("department", new SelectList(Model.Departments, "Id", "Name"), "Afdeling", new {@class = "form-control searchTarget textinput", id = "department", placeholder = "Afdeling"})
                     <span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
                 </div>
             </div>
@@ -71,7 +71,7 @@
             <div class="row" id="roomRow">
                 <div class="col-md-2">
                     <p><b>Lokale:</b> @item.Name</p>
-                    <p><b>Afdeling:</b> @item.Department</p>
+                    <p><b>Afdeling:</b> @item.Department.Name</p>
                 </div>
                 <div class="col-md-4">
                     <p><b>Antal personer:</b> @item.Capacity</p>

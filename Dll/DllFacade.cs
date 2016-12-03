@@ -23,5 +23,8 @@ namespace Dll {
         public IAccountGateway GetAccountGateway() {
             return new AccountGateway();
         }
+        public IGateway<Department, int> GetDepartmentGateway() {
+            return new DepartmentGateway();
+        }
     }
 }

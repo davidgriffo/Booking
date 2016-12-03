@@ -13,79 +13,79 @@ using Dll.Gateways;
 
 namespace Booking.Controllers {
     [RequireSuperAdmin]
-    public class EquipmentsController : Controller {
-        private IGateway<Equipment, int> _em = new DllFacade().GetEquipmentGateway();
+    public class DepartmentsController : Controller {
+        private readonly IGateway<Department, int> _departmentGateway = new DllFacade().GetDepartmentGateway();
 
-        // GET: Equipments
+        // GET: Departments
         public ActionResult Index() {
-            return View(_em.Read());
+            return View(_departmentGateway.Read());
         }
 
-        // GET: Equipments/Create
+        // GET: Departments/Create
         public ActionResult Create() {
             return View();
         }
 
-        // POST: Equipments/Create
+        // POST: Departments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Equipment equipment) {
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Department department) {
             if (ModelState.IsValid) {
-                _em.Create(equipment);
+                _departmentGateway.Create(department);
 
                 return RedirectToAction("Index");
             }
 
-            return View(equipment);
+            return View(department);
         }
 
-        // GET: Equipments/Edit/5
+        // GET: Departments/Edit/5
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var equipment = _em.Read(id.Value);
+            var department = _departmentGateway.Read(id.Value);
 
-            if (equipment == null) {
+            if (department == null) {
                 return HttpNotFound();
             }
-            return View(equipment);
+            return View(department);
         }
 
-        // POST: Equipments/Edit/5
+        // POST: Departments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Equipment equipment) {
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Department equipment) {
             if (ModelState.IsValid) {
-                _em.Update(equipment);
+                _departmentGateway.Update(equipment);
 
                 return RedirectToAction("Index");
             }
             return View(equipment);
         }
 
-        // GET: Equipments/Delete/5
+        // GET: Departments/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var equipment = _em.Read(id.Value);
+            var department = _departmentGateway.Read(id.Value);
 
-            if (equipment == null) {
+            if (department == null) {
                 return HttpNotFound();
             }
-            return View(equipment);
+            return View(department);
         }
 
-        // POST: Equipments/Delete/5
+        // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            _em.Delete(id);
+            _departmentGateway.Delete(id);
 
             return RedirectToAction("Index");
         }

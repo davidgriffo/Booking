@@ -12,5 +12,6 @@ namespace Booking.Models
         public Room Room { get; set; }
         public List<Equipment> Equipments { get; set; }
         public List<int> SelectedIds { get; set; }
+        public List<Department> Departments { get; set; }
     }
 }

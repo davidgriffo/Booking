@@ -53,18 +53,19 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Mine bookinger", "Index", "Bookings")</li>
+                        <li>@Html.ActionLink("Mine bookninger", "Index", "Profile")</li>
                         @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsSuperAdmin)
                         {
                             <li>@Html.ActionLink("Lokaler", "Index", "Rooms")</li>
                             <li>@Html.ActionLink("Udstyr", "Index", "Equipments")</li>
-                            <li>@Html.ActionLink("Bookinger", "Index", "Bookings")</li>
+                            <li>@Html.ActionLink("Afdelinger", "Index", "Departments")</li>
+                            <li>@Html.ActionLink("Bookninger", "Index", "Bookings")</li>
                             <li>@Html.ActionLink("Brugere", "Index", "Users")</li>
                         }
                         
                         @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsAdmin)
                         {
-                            <li>@Html.ActionLink("Bookinger", "Index", "Bookings")</li>
+                            <li>@Html.ActionLink("Bookninger", "Index", "Bookings")</li>
                         }
                         
                 

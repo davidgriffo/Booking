@@ -38,9 +38,6 @@ namespace Booking.Controllers
             }
 
             return View(model);
-        public ActionResult Index()
-        {     
-            return View(_accountGateway.GetUserLoggedIn());
         }
 
         [HttpGet]

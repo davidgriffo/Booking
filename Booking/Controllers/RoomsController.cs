@@ -15,12 +15,13 @@ using Dll.Gateways;
 namespace Booking.Controllers {
     [RequireAdmin]
     public class RoomsController : Controller {
-        private IGateway<Room, int> _rm = new DllFacade().GetRoomGateway();
-        private IGateway<Equipment, int> _equipmentGateway = new DllFacade().GetEquipmentGateway();
+        private readonly IGateway<Room, int> _roomsGateway = new DllFacade().GetRoomGateway();
+        private readonly IGateway<Equipment, int> _equipmentGateway = new DllFacade().GetEquipmentGateway();
+        private readonly IGateway<Department, int> _departmentsGateway = new DllFacade().GetDepartmentGateway();
 
         // GET: Rooms
         public ActionResult Index() {
-            return View(_rm.Read());
+            return View(_roomsGateway.Read());
         }
 
         // GET: Rooms/Details/5
@@ -28,7 +29,7 @@ namespace Booking.Controllers {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var room = _rm.Read(id.Value);
+            var room = _roomsGateway.Read(id.Value);
 
             if (room == null) {
                 return HttpNotFound();
@@ -38,7 +39,7 @@ namespace Booking.Controllers {
 
         // GET: Rooms/Create
         public ActionResult Create() {
-            var model = new RoomEquipmentViewModels{Equipments = _equipmentGateway.Read()};
+            var model = new RoomEquipmentViewModels {Equipments = _equipmentGateway.Read(), Departments = _departmentsGateway.Read()};
 
             return View(model);
         }
@@ -48,11 +49,12 @@ namespace Booking.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Department,Equipment,Capacity")] Room room, List<int> equipment) {
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Department,Equipment,Capacity")] Room room,
+            List<int> equipment) {
             if (ModelState.IsValid) {
                 room.Equipment = new List<Equipment>();
                 equipment?.ForEach(x => room.Equipment.Add(new Equipment {Id = x}));
-                _rm.Create(room);
+                _roomsGateway.Create(room);
 
                 return RedirectToAction("Index");
             }
@@ -65,7 +67,7 @@ namespace Booking.Controllers {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var room = _rm.Read(id.Value);
+            var room = _roomsGateway.Read(id.Value);
             var equipment = _equipmentGateway.Read();
 
             if (room == null) {
@@ -75,7 +77,7 @@ namespace Booking.Controllers {
             var tempList = new List<int>();
             room.Equipment.ForEach(x => tempList.Add(x.Id));
 
-            return View(new RoomEquipmentViewModels {Equipments = equipment, Room = room, SelectedIds = tempList});
+            return View(new RoomEquipmentViewModels {Equipments = equipment, Room = room, SelectedIds = tempList, Departments = _departmentsGateway.Read()});
         }
 
         // POST: Rooms/Edit/5
@@ -83,11 +85,12 @@ namespace Booking.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Department,Capacity")] Room room, List<int> equipment) {
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Department,Capacity")] Room room,
+            List<int> equipment) {
             if (ModelState.IsValid) {
                 room.Equipment = new List<Equipment>();
-                equipment?.ForEach(x => room.Equipment.Add(new Equipment { Id = x }));
-                _rm.Update(room);
+                equipment?.ForEach(x => room.Equipment.Add(new Equipment {Id = x}));
+                _roomsGateway.Update(room);
 
                 return RedirectToAction("Index");
             }
@@ -99,7 +102,7 @@ namespace Booking.Controllers {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var room = _rm.Read(id.Value);
+            var room = _roomsGateway.Read(id.Value);
 
             if (room == null) {
                 return HttpNotFound();
@@ -111,7 +114,7 @@ namespace Booking.Controllers {
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            var room = _rm.Delete(id);
+            var room = _roomsGateway.Delete(id);
 
             return RedirectToAction("Index");
         }
