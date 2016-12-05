@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Dll.Entities.Booking>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Oversigt over bookinger</h2>
+
+<p>
+    @Html.ActionLink("Opret ny booking", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Room.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToDate)
+            </td>
+            <td>
+                @Html.ActionLink("Ændre", "EditBooking", new {
+           id = item.Id
+       }) |
+                @Html.ActionLink("Detaljer", "BookingDetails", new {
+           id = item.Id
+       }) |
+                @Html.ActionLink("Slet", "DeleteBooking", new {
+           id = item.Id
+       })
+            </td>
+        </tr>
+    }
+
+</table>
