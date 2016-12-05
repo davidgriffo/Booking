@@ -345,6 +345,10 @@
     <Content Include="Views\Departments\Delete.cshtml" />
     <Content Include="Views\Departments\Edit.cshtml" />
     <Content Include="Views\Departments\Index.cshtml" />
+    <Content Include="Views\Profile\ViewBookings.cshtml" />
+    <Content Include="Views\Profile\EditBooking.cshtml" />
+    <Content Include="Views\Profile\BookingDetails.cshtml" />
+    <Content Include="Views\Profile\DeleteBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
