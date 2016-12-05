@@ -41,6 +41,7 @@ namespace Dll.Gateways {
         public bool Register(User user, string password) {
             using (var client = new HttpClient()) {
                 SetupClient(client);
+                AddAuthorizationHeader(client);
 
                 HttpResponseMessage response = client.PostAsJsonAsync($"api/account/register", user).Result;
                 return response.IsSuccessStatusCode;
