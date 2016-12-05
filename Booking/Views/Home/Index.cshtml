@@ -26,7 +26,7 @@
         <div class="row" id="searchInputRow">
             <div class="col-md-3">
                 <div class="input-group">
-                    @Html.DropDownList("department", new SelectList(Model.Departments, "Id", "Name"), "Afdeling", new {@class = "form-control searchTarget textinput", id = "department", placeholder = "Afdeling"})
+                    @Html.DropDownList("department", new SelectList(Model.Departments, "Id", "Name"), "Alle afdelinger", new {@class = "form-control searchTarget textinput", id = "department"})
                     <span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
                 </div>
             </div>
