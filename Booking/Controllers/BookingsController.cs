@@ -14,7 +14,7 @@ using Dll.Gateways;
 
 namespace Booking.Controllers
 {
-    [RequireUser]
+    [RequireAdmin]
     public class BookingsController : Controller
     {
         private IGateway<Dll.Entities.Booking, int> _bm = new DllFacade().GetBookingGateway();
@@ -23,20 +23,7 @@ namespace Booking.Controllers
         // GET: Bookings
         public ActionResult Index()
         {
-            if (_ag.GetUserLoggedIn().IsSuperAdmin)
-            {
-                return View(_bm.Read());
-            }
-
-            List<Dll.Entities.Booking> bookings = new List<Dll.Entities.Booking>();
-
-            foreach (var booking in _bm.Read()) {
-                if (booking.Creator.Id == _ag.GetUserLoggedIn().Id) {
-                    bookings.Add(booking);
-                }
-            }
-
-            return View(bookings);
+            return View(_bm.Read());
         }
 
         // GET: Bookings/Details/5
@@ -52,12 +39,8 @@ namespace Booking.Controllers
             {
                 return HttpNotFound();
             }
-            if (_ag.GetUserLoggedIn().IsSuperAdmin) {
-                return View(booking);
-            } else if (_ag.GetUserLoggedIn().Id == booking.Creator.Id) {
-                return View(booking);
-            }
-            return RedirectToAction("Index");
+
+            return View(booking);
         }
 
         // GET: Bookings/Create
@@ -96,12 +79,7 @@ namespace Booking.Controllers
             {
                 return HttpNotFound();
             }
-            if (_ag.GetUserLoggedIn().IsSuperAdmin) {
-                return View(booking);
-            } else if (_ag.GetUserLoggedIn().Id == booking.Creator.Id) {
-                return View(booking);
-            }
-            return RedirectToAction("Index");
+            return View(booking);
         }
 
         // POST: Bookings/Edit/5
@@ -134,13 +112,7 @@ namespace Booking.Controllers
             {
                 return HttpNotFound();
             }
-            if (_ag.GetUserLoggedIn().IsSuperAdmin) {
-                return View(booking);
-            } else if (_ag.GetUserLoggedIn().Id == booking.Creator.Id)
-            {
-                return View(booking);
-            }
-            return RedirectToAction("Index");
+            return View(booking);
         }
 
         // POST: Bookings/Delete/5
