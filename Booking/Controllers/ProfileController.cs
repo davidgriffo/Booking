@@ -64,7 +64,7 @@ namespace Booking.Controllers
             return View(user);
         }
 
-        public ActionResult ViewBookings()
+        public ActionResult Bookings()
         {
             var listBookings = new List<Dll.Entities.Booking>();
             foreach (var booking in _bookingGateway.Read())
