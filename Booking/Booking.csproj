@@ -336,7 +336,6 @@
     <Content Include="Views\Shared\_Login_Layout.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\SelectedBooking\BookRoom.cshtml" />
-    <Content Include="Views\SelectedBooking\BookRoomConfirm.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Bookings\UserBooking.cshtml" />
@@ -370,10 +369,6 @@
     <ProjectReference Include="..\Dll\Dll.csproj">
       <Project>{d3e6eafd-9878-4562-9a86-ffdf18b57567}</Project>
       <Name>Dll</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Search\Search.csproj">
-      <Project>{0773c5fa-5428-4eb2-a533-fe2d53086758}</Project>
-      <Name>Search</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

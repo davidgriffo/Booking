@@ -74,9 +74,9 @@ namespace Booking.Controllers
             var eventList = from e in ApptListForDate
                             select new {
                                 id = e.Id,
-                                title = e.Creator.FirstName + " " + e.Creator.LastName,
-                                start = e.FromDate,
-                                end = e.ToDate,
+                                title = e.Creator.FirstName + " " + e.Creator.LastName + "\n" + e.Room.Name,
+                                start = e.FromDate.AddHours(1),
+                                end = e.ToDate.AddHours(1),
                                 allDay = false
                             };
             var rows = eventList.ToArray();

@@ -10,8 +10,6 @@ using Dll;
 using Dll.Entities;
 using Dll.Gateways;
 using Microsoft.Ajax.Utilities;
-using Search;
-
 namespace Booking.Controllers {
     [RequireUser]
     public class HomeController : Controller {
@@ -24,32 +22,6 @@ namespace Booking.Controllers {
         public ActionResult Index() {
             var viewModel = new IndexViewModel {Rooms = _rg.Read(), Equipment = _eg.Read(), Departments = _departmentGateway.Read()};
             return View(viewModel);
-        }
-
-        public ActionResult Search(string startDate, string endDate, int? capacity, List<int> selectedEquipment) {
-            var searcher = new SearchRooms();
-
-            var allRooms = _rg.Read();
-            if (capacity != null && capacity > 0) {
-                allRooms = searcher.CheckCapacity(allRooms, capacity.Value);
-            }
-            if (!startDate.IsNullOrWhiteSpace() && !endDate.IsNullOrWhiteSpace()) {
-                DateTimeFormatInfo dk = new CultureInfo("da-DK", false).DateTimeFormat;
-                var startDateTime = Convert.ToDateTime(startDate, dk);
-                var endDateTime = Convert.ToDateTime(endDate, dk);
-
-                allRooms = searcher.CheckAvailibility(allRooms, _bg.Read(), startDateTime, endDateTime);
-            }
-            if (selectedEquipment != null && selectedEquipment.Count > 0) {
-                var equipment = new List<Equipment>();
-                selectedEquipment.ForEach(x => equipment.Add(new Equipment {Id = x}));
-
-                allRooms = searcher.CheckEquipment(allRooms, equipment);
-            }
-
-
-            var viewModel = new IndexViewModel {Rooms = allRooms, Equipment = _eg.Read(), Departments = _departmentGateway.Read() };
-            return View("Index", viewModel);
         }
     }
 }

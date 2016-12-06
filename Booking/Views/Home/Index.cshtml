@@ -5,13 +5,13 @@
 }
 
 <div class="container">
-        
+
     <form>
         <div class="row">
             <div class='col-md-6'>
                 <div class="form-group">
                     <div class='input-group date searchTarget' id='datetimepicker1' data-date-format="dd mm yyyy hh:ii">
-                        <input name="startDate" type='text' id="startDate" class="form-control searchTarget datepicker" placeholder="Start dato" />
+                        <input name="startDate" type='text' id="startDate" class="form-control searchTarget datepicker" placeholder="Start dato"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -21,7 +21,7 @@
             <div class='col-md-6'>
                 <div class="form-group">
                     <div class='input-group date searchTarget' id='datetimepicker2' data-date-format="dd mm yyyy hh:ii">
-                        <input name="endDate" type='text' id="endDate" class="form-control searchTarget datepicker" placeholder="Slut dato" />
+                        <input name="endDate" type='text' id="endDate" class="form-control searchTarget datepicker" placeholder="Slut dato"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -30,20 +30,25 @@
             </div>
         </div>
         <script type="text/javascript">
-            $(function () {
+            $(function() {
                 $('#datetimepicker1').datetimepicker();
 
-                $('#datetimepicker2').datetimepicker({
-                    useCurrent: false //Important! See issue #1075
-                });
+                $('#datetimepicker2')
+                    .datetimepicker({
+                        useCurrent: false //Important! See issue #1075
+                    });
 
-                $("#datetimepicker1").on("dp.change", function (e) {
-                    $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
-                });
+                $("#datetimepicker1")
+                    .on("dp.change",
+                        function(e) {
+                            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+                        });
 
-                $("#datetimepicker2").on("dp.change", function (e) {
-                    $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
-                });
+                $("#datetimepicker2")
+                    .on("dp.change",
+                        function(e) {
+                            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+                        });
             });
 
         </script>
@@ -52,7 +57,7 @@
         <div class="row" id="searchInputRow">
             <div class="col-md-3">
                 <div class="input-group">
-                    @Html.DropDownList("department", new SelectList(Model.Departments, "Id", "Name"), "Alle afdelinger", new { @class = "form-control searchTarget textinput", id = "department" })
+                    @Html.DropDownList("department", new SelectList(Model.Departments, "Id", "Name"), "Alle afdelinger", new {@class = "form-control searchTarget textinput", id = "department"})
                     <span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
                 </div>
             </div>
@@ -65,9 +70,11 @@
             </div>
 
             <div class="col-md-6">
-                <div class="input-group">
-                    @Html.ListBox("selectedEquipment", new MultiSelectList(Model.Equipment, "Id", "Name"), new { @class = "searchTarget multiDrop js-states form-control textinput", id = "equipment", multiple = "multiple" })
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                <div class="form-group">
+                    <div class="input-group select2-bootstrap-append">
+                        @Html.ListBox("selectedEquipment", new MultiSelectList(Model.Equipment, "Id", "Name"), new {@class = "searchTarget multiDrop js-states form-control textinput", id = "equipment", multiple = "multiple"})
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    </div>
                 </div>
             </div>
 
@@ -75,11 +82,11 @@
         </div>
 
 
-
         <script type="text/javascript">
-            $(".multiDrop").select2({
-                placeholder: { text: "Udstyr" }
-            });
+            $(".multiDrop")
+                .select2({
+                    placeholder: { text: "Udstyr" }
+                });
         </script>
 
         @*<div class="row">
@@ -88,27 +95,33 @@
                 </div>
             </div>*@
 
-        <hr />
+        <hr/>
 
         <div class="container-content" id="test1">
             @foreach (var item in Model.Rooms) {
                 <div class="row" id="roomRow">
                     <div class="col-md-2">
-                        <p><b>Lokale:</b> @item.Name</p>
-                        <p><b>Afdeling:</b> @item.Department.Name</p>
+                        <p>
+                            <b>Lokale:</b> @item.Name</p>
+                        <p>
+                            <b>Afdeling:</b> @item.Department.Name</p>
                     </div>
                     <div class="col-md-4">
-                        <p><b>Antal personer:</b> @item.Capacity</p>
-                        <p><b>Beskrivelse:</b> @item.Description</p>
+                        <p>
+                            <b>Antal personer:</b> @item.Capacity</p>
+                        <p>
+                            <b>Beskrivelse:</b> @item.Description</p>
                     </div>
                     <div class="col-md-4">
-                        <p><b>Udstyr:</b></p>
+                        <p>
+                            <b>Udstyr:</b>
+                        </p>
                         @foreach (var equipment in item.Equipment) {
                             <p>@equipment.Name</p>
                         }
                     </div>
                     <div class="col-md-2">
-                        <button formaction="@Url.Action("BookRoom", "SelectedBooking", new { Id = item.Id})" type="submit" class="glyphicon glyphicon-calendar" id="btnBook"></button>
+                        <button formaction="@Url.Action("BookRoom", "SelectedBooking", new {Id = item.Id})" type="submit" class="glyphicon glyphicon-calendar" id="btnBook"></button>
                     </div>
                 </div>
             }
@@ -120,5 +133,5 @@
 
 @section scripts
 {
-    <script src="~/Scripts/liveupdate.js"></script>    
+    <script src="~/Scripts/liveupdate.js"></script>
 }

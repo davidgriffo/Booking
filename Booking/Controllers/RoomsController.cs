@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -11,6 +12,7 @@ using Booking.Models;
 using Dll;
 using Dll.Entities;
 using Dll.Gateways;
+using Booking = Dll.Entities.Booking;
 
 namespace Booking.Controllers {
     [RequireAdmin]
@@ -34,24 +36,19 @@ namespace Booking.Controllers {
                 return HttpNotFound();
             }
             var bookingsInRoom = _roomsGateway.GetBookingsForRoom(room.Id);
-            var events = "";
-            foreach (var booking in bookingsInRoom) {
-                events += "{";
-                events += $"title: '{booking.Creator.FirstName} {booking.Creator.LastName}',start: '{booking.FromDate}, end: '{booking.ToDate}'";
-                events += "},";
-            }
 
-            return View(new RoomBookingViewModel {Room = room, Events = events, Bookings = bookingsInRoom});
+            return View(new RoomBookingViewModel {Room = room, Bookings = bookingsInRoom});
         }
 
         public JsonResult GetBookings(int id) {
-            var ApptListForDate = _roomsGateway.GetBookingsForRoom(id);
-            var eventList = from e in ApptListForDate
+            var bookings = _roomsGateway.GetBookingsForRoom(id);
+            var eventList = from booking in bookings
                             select new {
-                                id = e.Id,
-                                title = e.Creator.FirstName + " " + e.Creator.LastName,
-                                start = e.FromDate,
-                                end = e.ToDate,
+                                id = booking.Id,
+                                title = booking.Creator.FirstName + " " + booking.Creator.LastName + "\n" + booking.Room.Name,
+                                description = booking.Room.Name,
+                                start = booking.FromDate.AddHours(1),
+                                end = booking.ToDate.AddHours(1),
                                 allDay = false
                             };
             var rows = eventList.ToArray();

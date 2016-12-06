@@ -12,23 +12,21 @@ using Microsoft.Ajax.Utilities;
 
 namespace Booking.Controllers {
     public class SelectedBookingController : Controller {
-        private IGateway<Room, int> _rg = new DllFacade().GetRoomGateway();
-        private IGateway<Dll.Entities.Booking, int> _bg = new DllFacade().GetBookingGateway();
-        private IAccountGateway _ag = new DllFacade().GetAccountGateway();
+        private readonly IGateway<Room, int> _roomGateway = new DllFacade().GetRoomGateway();
+        private readonly IGateway<Dll.Entities.Booking, int> _bookingGateway = new DllFacade().GetBookingGateway();
+        private readonly IAccountGateway _accountGateway = new DllFacade().GetAccountGateway();
 
         [HttpGet]
         // GET: SelectedBooking/BookRoom
         public ActionResult BookRoom(string startDate, string endDate, int? id) {
             if (id != null & id > 0) {
-
-                var model = new BookRoomViewModel {Room = _rg.Read(id.Value)};
+                var model = new BookRoomViewModel {Room = _roomGateway.Read(id.Value)};
                 if (!startDate.IsNullOrWhiteSpace()) {
                     model.StartDate = startDate;
                 }
                 if (!endDate.IsNullOrWhiteSpace()) {
                     model.EndDate = endDate;
                 }
-
 
                 return View(model);
             }
@@ -37,49 +35,27 @@ namespace Booking.Controllers {
 
         [HttpPost]
         // POST: SelectedBooking/BookRoom
-        public ActionResult BookRoomConfirm(string startDate, string endDate, int roomId) {
+        public ActionResult BookRoom(string startDate, string endDate, int roomId) {
             DateTimeFormatInfo dk = new CultureInfo("da-DK", false).DateTimeFormat;
             var startDateConverted = Convert.ToDateTime(startDate, dk);
             var endDateConverted = Convert.ToDateTime(endDate, dk);
 
-            var user = _ag.GetUserLoggedIn();
+            //var user = _accountGateway.GetUserLoggedIn();
             var booking = new Dll.Entities.Booking() {
-                Creator = user,
-                Room = _rg.Read(roomId),
+                //Creator = user,
+                Room = new Room {Id = roomId},
                 FromDate = startDateConverted,
                 ToDate = endDateConverted,
-                Accepted = new List<User>(),
-                Invited = new List<User>()
+                //Accepted = new List<User>(),
+                //Invited = new List<User>()
             };
 
-            bool isAvailible = true;
-            Dll.Entities.Booking createdBooking;
-
-            foreach (var bookingToCheck in _bg.Read()) {
-                if (bookingToCheck.Room.Id != roomId) {
-                    continue;
-                }
-
-                //CHECK AVAILIBILITY HERE
-                if (bookingToCheck.ToDate <= endDateConverted && bookingToCheck.ToDate >= startDateConverted) {
-                    isAvailible = false;
-                    break;
-                } else if (bookingToCheck.FromDate <= endDateConverted && bookingToCheck.FromDate >= startDateConverted) {
-                    isAvailible = false;
-                    break;
-                } else if (bookingToCheck.FromDate <= startDateConverted && bookingToCheck.ToDate >= endDateConverted) {
-                    isAvailible = false;
-                    break;
-                }
-            }
-            if (isAvailible) {
-                createdBooking = _bg.Create(booking);
-            } else {
-                createdBooking = null;
+            var bookingCreated = _bookingGateway.Create(booking);
+            if (bookingCreated != null) {
+                return RedirectToAction("Bookings", "Profile");
             }
 
-
-            return View(createdBooking);
+            return View(new BookRoomViewModel {Room = _roomGateway.Read(roomId), StartDate = startDate, EndDate = endDate, ErrorMessage = "Rummet er allerede booket i det valgte tidsrum"});
         }
     }
 }

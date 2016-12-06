@@ -45,21 +45,27 @@
         <script>
             $(document)
                 .ready(function() {
-
                     $('#calendar')
                         .fullCalendar({
-                            header: {
-                                left: 'prev,next today',
-                                center: 'title',
-                                right: ''
-                            },
-                            defaultView: "agendaWeek",
-                            navLinks: false, // can click day/week names to navigate views
-                            editable: false,
-                            eventLimit: true, // allow "more" link when too many events
-                            events: '/Rooms/GetBookings/@Model.Room.Id'
-                        });
-
+                        titleFormat: 'D MMMM YYYY',
+                        columnFormat: 'ddd D/M',
+                        dayNamesShort: ['Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'],
+                        monthNames: [
+                            'Januar', 'Februar', 'Marts', 'April', 'Maj', 'Juni', 'Juli',
+                            'August', 'September', 'Oktober', 'November', 'December'
+                        ],
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: ''
+                        },
+                        defaultView: "agendaWeek",
+                        events: '/Rooms/GetBookings/@Model.Room.Id',
+                        axisFormat: 'HH:mm',
+                        timeFormat: 'HH:mm',
+                        slotLabelFormat: "HH:mm",
+                        allDaySlot: false
+                    });
                 });
         </script>
 

@@ -9,5 +9,6 @@ namespace Booking.Models {
         public Room Room { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }
