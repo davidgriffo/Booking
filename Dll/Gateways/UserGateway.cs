@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Dll.Entities;
 
 namespace Dll.Gateways {
-    class UserGateway : AbstractGateway<User, string> {
+    class UserGateway : AbstractUserGateway {
 
         private const string ApiRef = "api/User";
         protected override User Create(HttpClient client, User element) {
@@ -31,6 +31,11 @@ namespace Dll.Gateways {
 
         protected override bool Delete(HttpClient client, string id) {
             throw new NotImplementedException();
+        }
+
+        protected override List<Booking> GetBookingsForRoom(HttpClient client) {
+            HttpResponseMessage response = client.GetAsync($"{ApiRef}/GetBookingsForUser").Result;
+            return response.IsSuccessStatusCode ? response.Content.ReadAsAsync<List<Booking>>().Result : null;
         }
     }
 }

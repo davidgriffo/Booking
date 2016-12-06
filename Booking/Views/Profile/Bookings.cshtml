@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
 }
 
+<<<<<<< HEAD
 <h2>Oversigt over dine bookinger</h2>
 
 <p>
@@ -24,28 +25,74 @@
     </tr>
 
     @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FromDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToDate)
-            </td>
-            <td>
-                @Html.ActionLink("Ændre", "EditBooking", new {
-           id = item.Id
-       }) |
-                @Html.ActionLink("Detaljer", "BookingDetails", new {
-           id = item.Id
-       }) |
-                @Html.ActionLink("Slet", "DeleteBooking", new {
-           id = item.Id
-       })
-            </td>
-        </tr>
-    }
+=======
+<link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
+<link href="~/Content/fullcalendar.print.css" rel="stylesheet" media="print" />
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/fullcalendar.min.js"></script>
 
-</table>
+<h2>Oversigt over bookinger</h2>
+
+<div class="row">
+    <script>
+            $(document)
+                .ready(function() {
+
+                    $('#calendar')
+                        .fullCalendar({
+                            header: {
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: ''
+                            },
+                            defaultView: "agendaWeek",
+                            navLinks: false, // can click day/week names to navigate views
+                            editable: false,
+                            eventLimit: true, // allow "more" link when too many events
+                            events: '/Profile/GetBookings'
+                        });
+
+                });
+    </script>
+
+    <div id="calendar"></div>
+
+</div>
+
+<div class="row">
+    <table class="table">
+>>>>>>> calendar
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Room.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FromDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToDate)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Ændre", "EditBooking", new { id = item.Id }) |
+                    @Html.ActionLink("Detaljer", "BookingDetails", new { id = item.Id }) |
+                    @Html.ActionLink("Slet", "DeleteBooking", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

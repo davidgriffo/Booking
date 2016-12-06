@@ -6,7 +6,7 @@
 
 <div class="container">
         
-    <form action="@Url.Action("BookRoom", "SelectedBooking")">
+    <form>
         <div class="row">
             <div class='col-md-6'>
                 <div class="form-group">
@@ -108,8 +108,7 @@
                         }
                     </div>
                     <div class="col-md-2">
-                        <input type="hidden" name="Id" value="@item.Id"/>
-                        <button type="submit" class="glyphicon glyphicon-calendar" id="btnBook"></button>
+                        <button formaction="@Url.Action("BookRoom", "SelectedBooking", new { Id = item.Id})" type="submit" class="glyphicon glyphicon-calendar" id="btnBook"></button>
                     </div>
                 </div>
             }

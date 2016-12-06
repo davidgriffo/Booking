@@ -74,6 +74,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Gateways\AbstractGateway.cs" />
     <Compile Include="Gateways\AbstractRoomGateway.cs" />
+    <Compile Include="Gateways\AbstractUserGateway.cs" />
     <Compile Include="Gateways\AccountGateway.cs" />
     <Compile Include="Gateways\BookingGateway.cs" />
     <Compile Include="Gateways\DepartmentGateway.cs" />
