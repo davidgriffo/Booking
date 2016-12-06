@@ -18,7 +18,7 @@ namespace Booking.Controllers {
 
         // GET: Users
         public ActionResult Index() {
-            var model = new UsersViewModel {Users = _userGateway.Read()};
+            var model = new UsersViewModel {Users = _userGateway.Read().FindAll(x => x.LockoutEnabled == false)};
 
             return View(model);
         }
@@ -27,8 +27,31 @@ namespace Booking.Controllers {
             return View();
         }
 
-        public ActionResult Delete() {
-            return View();
+        public ActionResult Delete(String id) {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = _userGateway.Read(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult ConfirmDelete(String id)
+        {
+            var user = _userGateway.Read(id);
+
+            user.LockoutEnabled = true;
+
+            _userGateway.Update(user);
+
+            return RedirectToAction("Index");
         }
 
         //
