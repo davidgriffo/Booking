@@ -78,10 +78,9 @@
                             value.Description +
                             '</p></div><div class="col-md-4"><p><b>Udstyr:</b>' +
                             item +
-                            '</p></div><div class="col-md-2"> <input type="hidden" name="Id" value="' + value.Id + '"/> <button id="btnBook" type="submit" class="glyphicon glyphicon-calendar"></button> </div> </div>'
+                            '</p></div><div class="col-md-2"> <button formaction="/SelectedBooking/BookRoom/' + value.Id + '" type="submit" id="btnBook" class="glyphicon glyphicon-calendar"></a> </div> </div>'
                         );
                     });
-
             })
             .fail(function(jqxhr, textStatus, error) {
                 alert(error);

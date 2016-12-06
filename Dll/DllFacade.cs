@@ -17,7 +17,7 @@ namespace Dll {
         public IGateway<Equipment, int> GetEquipmentGateway() {
             return new EquipmentGateway();
         }
-        public IGateway<User, string> GetUserGateway() {
+        public AbstractUserGateway GetUserGateway() {
             return new UserGateway();
         }
         public IAccountGateway GetAccountGateway() {

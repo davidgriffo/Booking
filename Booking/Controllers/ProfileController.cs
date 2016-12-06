@@ -17,7 +17,7 @@ namespace Booking.Controllers
     public class ProfileController : Controller
     {
         private readonly IAccountGateway _accountGateway = new DllFacade().GetAccountGateway();
-        private readonly IGateway<User, string> _userGateway = new DllFacade().GetUserGateway();
+        private readonly AbstractUserGateway _userGateway = new DllFacade().GetUserGateway();
         private readonly IGateway<Dll.Entities.Booking, int> _bookingGateway = new DllFacade().GetBookingGateway(); 
 
         // GET: Profile
@@ -64,17 +64,23 @@ namespace Booking.Controllers
             return View(user);
         }
 
-        public ActionResult Bookings()
-        {
-            var listBookings = new List<Dll.Entities.Booking>();
-            foreach (var booking in _bookingGateway.Read())
-            {
-                if (booking.Creator.Id ==_accountGateway.GetUserLoggedIn().Id)
-                {
-                    listBookings.Add(booking);
-                }
-            }
-            return View(listBookings);
+        public ActionResult Bookings() {
+            var bookings = _userGateway.GetBookingsForUser();
+            return View(bookings);
+        }
+
+        public JsonResult GetBookings() {
+            var ApptListForDate = _userGateway.GetBookingsForUser();
+            var eventList = from e in ApptListForDate
+                            select new {
+                                id = e.Id,
+                                title = e.Creator.FirstName + " " + e.Creator.LastName,
+                                start = e.FromDate,
+                                end = e.ToDate,
+                                allDay = false
+                            };
+            var rows = eventList.ToArray();
+            return Json(rows, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Bookings/Edit/5

@@ -26,7 +26,7 @@
             <div class='col-md-6'>
                 <div class="form-group">
                     <div class='input-group date searchTarget' id='datetimepicker1' data-date-format="dd mm yyyy hh:ii">
-                        <input name="startDate" type='text' id="startDate" class="form-control searchTarget datepicker" placeholder="Start dato"/>
+                        <input name="startDate" value="@Model.StartDate" type='text' id="startDate" class="form-control searchTarget datepicker" placeholder="Start dato"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -36,7 +36,7 @@
             <div class='col-md-6'>
                 <div class="form-group">
                     <div class='input-group date searchTarget' id='datetimepicker2' data-date-format="dd mm yyyy hh:ii">
-                        <input name="endDate" type='text' id="endDate" class="form-control searchTarget datepicker" placeholder="Slut dato"/>
+                        <input name="endDate" value="@Model.EndDate" type='text' id="endDate" class="form-control searchTarget datepicker" placeholder="Slut dato"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
