@@ -4,28 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-<<<<<<< HEAD
-<h2>Oversigt over dine bookinger</h2>
-
-<p>
-    @Html.ActionLink("Opret ny booking", "../")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Room.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FromDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ToDate)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model) {
-=======
 <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
 <link href="~/Content/fullcalendar.print.css" rel="stylesheet" media="print" />
 <script src="~/Scripts/moment.min.js"></script>
@@ -61,7 +39,6 @@
 
 <div class="row">
     <table class="table">
->>>>>>> calendar
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Room.Name)
