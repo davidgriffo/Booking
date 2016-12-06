@@ -2,35 +2,101 @@
 @{
     ViewBag.Title = "Index";
 }
-    @using (Html.BeginForm("BookRoomConfirm", "SelectedBooking", FormMethod.Post)) {
+
+<link href="~/Content/fullcalendar.min.css" rel="stylesheet"/>
+<link href="~/Content/fullcalendar.print.css" rel="stylesheet" media="print"/>
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/fullcalendar.min.js"></script>
+
+@using (Html.BeginForm("BookRoomConfirm", "SelectedBooking", FormMethod.Post)) {
     <div class="col-md-6">
         <h2>Valgte lokale</h2>
         <p>Navn: @Model.Room.Name</p>
         <p>Afdeling: @Model.Room.Department.Name</p>
         <p>Beskrivelse: @Model.Room.Description</p>
         <p>Antal personer: @Model.Room.Capacity</p>
-        <h2>Dato</h2>
-        <div class="col-md-6">
-            <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
-                <input name="startDate" type="datetime" value="@Model.StartDate" class="form-control" placeholder="Start dato">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
-                <input name="endDate" type="datetime" value="@Model.EndDate" class="form-control" placeholder="Slut dato">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
+
         <h2>Udstyr</h2>
         @foreach (var item in Model.Room.Equipment) {
             <p>@item.Name</p>
         }
+
+        <h2>Dato</h2>
+        <div class="row">
+            <div class='col-md-6'>
+                <div class="form-group">
+                    <div class='input-group date searchTarget' id='datetimepicker1' data-date-format="dd mm yyyy hh:ii">
+                        <input name="startDate" type='text' id="startDate" class="form-control searchTarget datepicker" placeholder="Start dato"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-6'>
+                <div class="form-group">
+                    <div class='input-group date searchTarget' id='datetimepicker2' data-date-format="dd mm yyyy hh:ii">
+                        <input name="endDate" type='text' id="endDate" class="form-control searchTarget datepicker" placeholder="Slut dato"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(function() {
+                $('#datetimepicker1').datetimepicker();
+
+                $('#datetimepicker2')
+                    .datetimepicker({
+                        useCurrent: false //Important! See issue #1075
+                    });
+
+                $("#datetimepicker1")
+                    .on("dp.change",
+                        function(e) {
+                            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+                        });
+
+                $("#datetimepicker2")
+                    .on("dp.change",
+                        function(e) {
+                            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+                        });
+            });
+
+        </script>
+    </div>
+    <div class="col-md-6">
+
+        <script>
+            $(document)
+                .ready(function() {
+
+                    $('#calendar')
+                        .fullCalendar({
+                            header: {
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: ''
+                            },
+                            defaultView: "agendaWeek",
+                            navLinks: false, // can click day/week names to navigate views
+                            editable: false,
+                            eventLimit: true, // allow "more" link when too many events
+                            events: '/Rooms/GetBookings/@Model.Room.Id'
+                        });
+
+                });
+        </script>
+
+        <div id="calendar"></div>
+
     </div>
     <input type="hidden" name="roomId" value="@Model.Room.Id">
     <div class="row">
         <input class="btn btn-ok" id="btnSearch" type="submit" value="Book.."/>
     </div>
-    }
+}

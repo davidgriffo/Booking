@@ -10,9 +10,10 @@ using System.Web;
 using System.Web.Configuration;
 
 namespace Dll.Gateways {
-    abstract class AbstractGateway<T, Y> : IGateway<T, Y> {
+    public abstract class AbstractGateway<T, Y> : IGateway<T, Y> {
 
         protected abstract T Create(HttpClient client, T element);
+
         public T Create(T element) {
             using (var client = new HttpClient()) {
                 SetupClient(client);
@@ -22,7 +23,9 @@ namespace Dll.Gateways {
                 return added;
             }
         }
+
         protected abstract T Read(HttpClient client, Y id);
+
         public T Read(Y id) {
             using (var client = new HttpClient()) {
                 SetupClient(client);
@@ -34,6 +37,7 @@ namespace Dll.Gateways {
         }
 
         protected abstract List<T> Read(HttpClient client);
+
         public List<T> Read() {
             using (var client = new HttpClient()) {
                 SetupClient(client);
@@ -45,6 +49,7 @@ namespace Dll.Gateways {
         }
 
         protected abstract T Update(HttpClient client, T element);
+
         public T Update(T element) {
             using (var client = new HttpClient()) {
                 SetupClient(client);
@@ -56,6 +61,7 @@ namespace Dll.Gateways {
         }
 
         protected abstract bool Delete(HttpClient client, Y id);
+
         public bool Delete(Y id) {
             using (var client = new HttpClient()) {
                 SetupClient(client);
@@ -68,14 +74,14 @@ namespace Dll.Gateways {
 
         #region helpers
 
-        private void SetupClient(HttpClient client) {
+        internal void SetupClient(HttpClient client) {
             string baseAddress = WebConfigurationManager.AppSettings["RestApiURL"];
             client.BaseAddress = new Uri(baseAddress);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        private void AddAuthorizationHeader(HttpClient client) {
+        internal void AddAuthorizationHeader(HttpClient client) {
             if (HttpContext.Current.Session["token"] != null) {
                 string token = HttpContext.Current.Session["token"].ToString();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
@@ -83,6 +89,5 @@ namespace Dll.Gateways {
         }
 
         #endregion
-
     }
 }

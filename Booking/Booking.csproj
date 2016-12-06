@@ -187,6 +187,7 @@
     <Compile Include="Models\BookingViewModel.cs" />
     <Compile Include="Models\BookRoomViewModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\RoomBookingViewModel.cs" />
     <Compile Include="Models\RoomEquipmentViewModels.cs" />
     <Compile Include="Models\UsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

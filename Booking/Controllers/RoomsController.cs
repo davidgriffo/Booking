@@ -15,7 +15,7 @@ using Dll.Gateways;
 namespace Booking.Controllers {
     [RequireAdmin]
     public class RoomsController : Controller {
-        private readonly IGateway<Room, int> _roomsGateway = new DllFacade().GetRoomGateway();
+        private readonly AbstractRoomGateway _roomsGateway = new DllFacade().GetRoomGateway();
         private readonly IGateway<Equipment, int> _equipmentGateway = new DllFacade().GetEquipmentGateway();
         private readonly IGateway<Department, int> _departmentsGateway = new DllFacade().GetDepartmentGateway();
 
@@ -30,11 +30,32 @@ namespace Booking.Controllers {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var room = _roomsGateway.Read(id.Value);
-
             if (room == null) {
                 return HttpNotFound();
             }
-            return View(room);
+            var bookingsInRoom = _roomsGateway.GetBookingsForRoom(room.Id);
+            var events = "";
+            foreach (var booking in bookingsInRoom) {
+                events += "{";
+                events += $"title: '{booking.Creator.FirstName} {booking.Creator.LastName}',start: '{booking.FromDate}, end: '{booking.ToDate}'";
+                events += "},";
+            }
+
+            return View(new RoomBookingViewModel {Room = room, Events = events, Bookings = bookingsInRoom});
+        }
+
+        public JsonResult GetBookings(int id) {
+            var ApptListForDate = _roomsGateway.GetBookingsForRoom(id);
+            var eventList = from e in ApptListForDate
+                            select new {
+                                id = e.Id,
+                                title = e.Creator.FirstName + " " + e.Creator.LastName,
+                                start = e.FromDate,
+                                end = e.ToDate,
+                                allDay = false
+                            };
+            var rows = eventList.ToArray();
+            return Json(rows, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Rooms/Create

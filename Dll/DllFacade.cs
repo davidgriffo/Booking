@@ -8,7 +8,7 @@ using Dll.Gateways;
 
 namespace Dll {
     public class DllFacade {
-        public IGateway<Room, int> GetRoomGateway() {
+        public AbstractRoomGateway GetRoomGateway() {
             return new RoomGateway();
         }
         public IGateway<Booking, int> GetBookingGateway() {
