@@ -1,14 +1,36 @@
-﻿@model Dll.Entities.Booking
+﻿@model Booking.Models.BookRoomViewModel
 @{
-    ViewBag.Title = "BookRoom";
+    ViewBag.Title = "Index";
 }
-
-@if (Model != null)
-{
-    <h2>Dit lokale er nu booket.</h2>
-}
-else
-{
-    <h2>Dit lokale er ikke booket, da det ikke er ledig i den givne periode.</h2>
-}
-
+    @using (Html.BeginForm("BookRoomConfirm", "SelectedBooking", FormMethod.Post)) {
+    <div class="col-md-6">
+        <h2>Valgte lokale</h2>
+        <p>Navn: @Model.Room.Name</p>
+        <p>Afdeling: @Model.Room.Department.Name</p>
+        <p>Beskrivelse: @Model.Room.Description</p>
+        <p>Antal personer: @Model.Room.Capacity</p>
+        <h2>Dato</h2>
+        <div class="col-md-6">
+            <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                <input name="startDate" type="datetime" value="@Model.StartDate" class="form-control" placeholder="Start dato">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                <input name="endDate" type="datetime" value="@Model.EndDate" class="form-control" placeholder="Slut dato">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>Udstyr</h2>
+        @foreach (var item in Model.Room.Equipment) {
+            <p>@item.Name</p>
+        }
+    </div>
+    <input type="hidden" name="roomId" value="@Model.Room.Id">
+    <div class="row">
+        <input class="btn btn-ok" id="btnSearch" type="submit" value="Book.."/>
+    </div>
+    }

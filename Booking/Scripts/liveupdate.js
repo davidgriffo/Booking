@@ -11,18 +11,18 @@
     }
     var ajax = null;
 
-    $(".searchTarget .datepicker, .textinput")
+    $(".datepicker, .textinput")
         .change(function() {
-            if (ajax != null) {
+            if (ajax !== null) {
                 ajax.abort();
-            };
+            }
             var data = {
                 startDate: $("#startDate").val(),
                 endDate: $("#endDate").val(),
                 department: $("#department :selected").val(),
                 capacity: $("#capacity").val(),
                 equipment: $("#equipment :selected")
-            }
+            };
 
             element.empty();
             setRow(data);
@@ -56,8 +56,6 @@
             })
             .done(function(json) {
 
-                console.log(finishedUrl);
-
                 //Convert the data to an json object.
                 var data = json;
 
@@ -80,9 +78,7 @@
                             value.Description +
                             '</p></div><div class="col-md-4"><p><b>Udstyr:</b>' +
                             item +
-                            '</p></div><div class="col-md-2">  <a class="glyphicon glyphicon-calendar" href="/SelectedBooking/Index/' +
-                            value.Id +
-                            '" id="btnBook"> </a>    </div>'
+                            '</p></div><div class="col-md-2"> <input type="hidden" name="Id" value="' + value.Id + '"/> <button id="btnBook" type="submit" class="glyphicon glyphicon-calendar"></button> </div> </div>'
                         );
                     });
 

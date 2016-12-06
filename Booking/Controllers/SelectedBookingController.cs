@@ -4,9 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Booking.Models;
 using Dll;
 using Dll.Entities;
 using Dll.Gateways;
+using Microsoft.Ajax.Utilities;
 
 namespace Booking.Controllers {
     public class SelectedBookingController : Controller {
@@ -14,12 +16,28 @@ namespace Booking.Controllers {
         private IGateway<Dll.Entities.Booking, int> _bg = new DllFacade().GetBookingGateway();
         private IAccountGateway _ag = new DllFacade().GetAccountGateway();
 
-        // GET: SelectedBooking
-        public ActionResult Index(int id) {
-            return View(_rg.Read(id));
+        [HttpGet]
+        // GET: SelectedBooking/BookRoom
+        public ActionResult BookRoom(string startDate, string endDate, int? id) {
+            if (id != null & id > 0) {
+
+                var model = new BookRoomViewModel {Room = _rg.Read(id.Value)};
+                if (!startDate.IsNullOrWhiteSpace()) {
+                    model.StartDate = startDate;
+                }
+                if (!endDate.IsNullOrWhiteSpace()) {
+                    model.EndDate = endDate;
+                }
+
+
+                return View(model);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult BookRoom(string startDate, string endDate, int roomId) {
+        [HttpPost]
+        // POST: SelectedBooking/BookRoom
+        public ActionResult BookRoomConfirm(string startDate, string endDate, int roomId) {
             DateTimeFormatInfo dk = new CultureInfo("da-DK", false).DateTimeFormat;
             var startDateConverted = Convert.ToDateTime(startDate, dk);
             var endDateConverted = Convert.ToDateTime(endDate, dk);
