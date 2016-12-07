@@ -18,5 +18,17 @@ namespace Dll.Gateways {
                 return GetBookingsForRoom(client);
             }
         }
+
+        protected abstract List<Booking> GetInvitesForUser(HttpClient client);
+
+        public List<Booking> GetInvitesForUser() {
+            using (var client = new HttpClient()) {
+                SetupClient(client);
+                AddAuthorizationHeader(client);
+
+                return GetInvitesForUser(client);
+            }
+        }
+
     }
 }

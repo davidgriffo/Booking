@@ -11,14 +11,12 @@ using Dll.Entities;
 using Dll.Gateways;
 using Booking = Dll.Entities.Booking;
 
-namespace Booking.Controllers
-{
+namespace Booking.Controllers {
     [RequireUser]
-    public class ProfileController : Controller
-    {
+    public class ProfileController : Controller {
         private readonly IAccountGateway _accountGateway = new DllFacade().GetAccountGateway();
         private readonly AbstractUserGateway _userGateway = new DllFacade().GetUserGateway();
-        private readonly IGateway<Dll.Entities.Booking, int> _bookingGateway = new DllFacade().GetBookingGateway(); 
+        private readonly AbstractBookingGateway _bookingGateway = new DllFacade().GetBookingGateway();
 
         // GET: Profile
         public ActionResult Index() {
@@ -44,20 +42,18 @@ namespace Booking.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit()
-        {
+        public ActionResult Edit() {
             return View(_accountGateway.GetUserLoggedIn());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, FirstName, LastName, Email, PhoneNumber, isAdmin, isSuperAdmin")]User user) {
-            if (ModelState.IsValid)
-            {
+        public ActionResult Edit(
+            [Bind(Include = "Id, FirstName, LastName, Email, PhoneNumber, isAdmin, isSuperAdmin")] User user) {
+            if (ModelState.IsValid) {
                 var updatedUser = _userGateway.Update(user);
 
-                if (updatedUser != null)
-                {
+                if (updatedUser != null) {
                     return RedirectToAction("Index");
                 }
             }
@@ -70,17 +66,39 @@ namespace Booking.Controllers
         }
 
         public JsonResult GetBookings() {
-            var ApptListForDate = _userGateway.GetBookingsForUser();
-            var eventList = from e in ApptListForDate
-                            select new {
-                                id = e.Id,
-                                title = e.Creator.FirstName + " " + e.Creator.LastName + "\n" + e.Room.Name,
-                                start = e.FromDate.AddHours(1),
-                                end = e.ToDate.AddHours(1),
-                                allDay = false
-                            };
-            var rows = eventList.ToArray();
-            return Json(rows, JsonRequestBehavior.AllowGet);
+            var bookings = _userGateway.GetBookingsForUser();
+
+            var bookingsList = from e in bookings
+                select
+                new {
+                    id = e.Id,
+                    title = e.Creator.FirstName + " " + e.Creator.LastName + "\n" + e.Room.Name,
+                    start = e.FromDate.AddHours(1),
+                    end = e.ToDate.AddHours(1),
+                    allDay = false
+                };
+            var bookingRows = bookingsList.ToArray();
+
+
+            return Json(bookingRows, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetInvites() {
+            var bookings = _userGateway.GetInvitesForUser();
+
+            var bookingsList = from e in bookings
+                               select
+                               new {
+                                   id = e.Id,
+                                   title = e.Creator.FirstName + " " + e.Creator.LastName + "\n" + e.Room.Name,
+                                   start = e.FromDate.AddHours(1),
+                                   end = e.ToDate.AddHours(1),
+                                   allDay = false
+                               };
+            var bookingRows = bookingsList.ToArray();
+
+
+            return Json(bookingRows, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Bookings/Edit/5
@@ -119,15 +137,23 @@ namespace Booking.Controllers
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            var model = new UsersBookingViewModel {
+                Users = _userGateway.Read(),
+                Booking = _bookingGateway.Read(id.Value)
+            };
+
+
+/**/
             var booking = _bookingGateway.Read(id.Value);
 
             if (booking == null) {
                 return HttpNotFound();
             }
             if (_accountGateway.GetUserLoggedIn().IsSuperAdmin) {
-                return View(booking);
+                return View(model);
             } else if (_accountGateway.GetUserLoggedIn().Id == booking.Creator.Id) {
-                return View(booking);
+                return View(model);
             }
             return RedirectToAction("Index");
         }
@@ -158,6 +184,17 @@ namespace Booking.Controllers
             _bookingGateway.Delete(id);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult InviteUsers(List<String> users, int bookingId) {
+            var selectedUsers = new List<User>();
+            users?.ForEach(x => selectedUsers.Add(new User {Id = x}));
+
+            var booking = _bookingGateway.Read(bookingId);
+            _bookingGateway.InviteUsers(booking, selectedUsers);
+
+            return RedirectToAction("BookingDetails", new {Id = booking.Id});
         }
     }
 }

@@ -67,8 +67,7 @@ namespace Booking.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Department,Equipment,Capacity")] Room room,
-            List<int> equipment) {
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Department,Equipment,Capacity")] Room room, List<int> equipment) {
             if (ModelState.IsValid) {
                 room.Equipment = new List<Equipment>();
                 equipment?.ForEach(x => room.Equipment.Add(new Equipment {Id = x}));

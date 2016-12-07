@@ -11,7 +11,7 @@ namespace Dll {
         public AbstractRoomGateway GetRoomGateway() {
             return new RoomGateway();
         }
-        public IGateway<Booking, int> GetBookingGateway() {
+        public AbstractBookingGateway GetBookingGateway() {
             return new BookingGateway();
         }
         public IGateway<Equipment, int> GetEquipmentGateway() {

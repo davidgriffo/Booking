@@ -1,36 +1,60 @@
-﻿@model Dll.Entities.Booking
+﻿@model Booking.Models.UsersBookingViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detaljer for din booking</h2>
 
 <div>
-    <h4>Booking</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FromDate)
+            @Html.DisplayNameFor(model => model.Booking.FromDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FromDate)
+            @Html.DisplayFor(model => model.Booking.FromDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ToDate)
+            @Html.DisplayNameFor(model => model.Booking.ToDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ToDate)
+            @Html.DisplayFor(model => model.Booking.ToDate)
+
         </dd>
 
+
+
+
     </dl>
+
 </div>
+@using (Html.BeginForm("InviteUsers", "Profile"))
+{
+    @Html.Hidden("bookingId", Model.Booking.Id)
+    <div class="form-group">
+        @Html.Label("Inviter personer", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.ListBox("users", new MultiSelectList(Model.Users, "id", "FirstName"), new {@class = "js-example-basic-multiple js-states form-control", multiple = "multiple"})
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(".js-example-basic-multiple").select2();
+    </script>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Inviter" id="btnSearch" class="btn btn-default" />
+        </div>
+    </div>
+}
+                      
 <p>
-    @Html.ActionLink("Edit", "EditBooking", new {
-    id = Model.Id
+    @Html.ActionLink("Ændre", "EditBooking", new {
+    id = Model.Booking.Id
 }) |
-    @Html.ActionLink("Back to List", "Bookings")
+    @Html.ActionLink("Tilbage til oversigt", "Bookings")
 </p>

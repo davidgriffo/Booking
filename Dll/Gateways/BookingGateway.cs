@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Dll.Entities;
 
 namespace Dll.Gateways {
-    class BookingGateway : AbstractGateway<Booking, int> {
+    class BookingGateway : AbstractBookingGateway {
         private const string ApiRef = "api/Booking";
 
         protected override Booking Create(HttpClient client, Booking element) {
@@ -33,6 +33,10 @@ namespace Dll.Gateways {
         protected override bool Delete(HttpClient client, int id) {
             HttpResponseMessage response = client.DeleteAsync($"{ApiRef}/{id}").Result;
             return response.IsSuccessStatusCode;
+        }
+
+        protected override void InviteUsers(HttpClient client, Booking booking, List<User> users) {
+            HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}/InviteUsers?id={booking.Id}", users).Result;
         }
     }
 }
