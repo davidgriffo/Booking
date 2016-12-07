@@ -18,9 +18,10 @@
     <form>
         <div class="row">
             <div class='col-md-6'>
+                <p>Starttid</p>
                 <div class="form-group">
                     <div class='input-group date searchTarget' id='datetimepicker1' data-date-format="dd-mm-yyyy hh:ii">
-                        <input name="startDate" type='text' value="@Model.FromDate" id="startDate" class="form-control searchTarget datepicker" placeholder="Start dato" />
+                        <input name="startDate" type='text' value="@Model.FromDate" id="startDate" class="form-control searchTarget datepicker" placeholder="Start dato"/>
                         <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -28,9 +29,10 @@
                 </div>
             </div>
             <div class='col-md-6'>
+                <p>Sluttid</p>
                 <div class="form-group">
                     <div class='input-group date searchTarget' id='datetimepicker2' data-date-format="dd-mm-yyyy hh:ii">
-                        <input name="endDate" type='text' value="@Model.ToDate" id="endDate" class="form-control searchTarget datepicker" placeholder="Slut dato" />
+                        <input name="endDate" type='text' value="@Model.ToDate" id="endDate" class="form-control searchTarget datepicker" placeholder="Slut dato"/>
                         <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
