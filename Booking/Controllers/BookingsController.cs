@@ -87,11 +87,15 @@ namespace Booking.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromDate,ToDate")] Dll.Entities.Booking booking)
+        public ActionResult Edit([Bind(Include = "Id,FromDate,ToDate")] Dll.Entities.Booking booking, string startDate, string endDate)
         {
             if (ModelState.IsValid)
             {
-                _bookingGateway.Update(booking);
+                //Husk locale
+                var bookingToUpdate = _bookingGateway.Read(booking.Id);
+                bookingToUpdate.FromDate = Convert.ToDateTime(startDate);
+                bookingToUpdate.ToDate = Convert.ToDateTime(endDate);
+                _bookingGateway.Update(bookingToUpdate);
 
                 return RedirectToAction("Index");
             }

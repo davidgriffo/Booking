@@ -18,43 +18,62 @@
    })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FromDate, htmlAttributes: new {
-           @class = "control-label col-md-2"
-       })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FromDate, new {
-               htmlAttributes = new {
-                   @class = "form-control"
-               }
-           })
-                @Html.ValidationMessageFor(model => model.FromDate, "", new {
-               @class = "text-danger"
-           })
+        <form>
+            <div class="row">
+                <div class='col-md-6'>
+                    <div class="form-group">
+                        <div class='input-group date searchTarget' id='datetimepicker1' data-date-format="dd-mm-yyyy hh:ii">
+                            <input name="startDate" type='text' value="@Model.FromDate" id="startDate" class="form-control searchTarget datepicker" placeholder="Start dato" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6'>
+                    <div class="form-group">
+                        <div class='input-group date searchTarget' id='datetimepicker2' data-date-format="dd-mm-yyyy hh:ii">
+                            <input name="endDate" type='text' value="@Model.ToDate" id="endDate" class="form-control searchTarget datepicker" placeholder="Slut dato" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+            <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    startDate: new Date
+                });
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ToDate, htmlAttributes: new {
-           @class = "control-label col-md-2"
-       })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ToDate, new {
-               htmlAttributes = new {
-                   @class = "form-control"
-               }
-           })
-                @Html.ValidationMessageFor(model => model.ToDate, "", new {
-               @class = "text-danger"
-           })
-            </div>
-        </div>
+                $('#datetimepicker2')
+                    .datetimepicker({
+                        useCurrent: false, //Important! See issue #1075
+                        startDate: new Date
+                    });
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                $("#datetimepicker1")
+                    .on("dp.change",
+                        function (e) {
+                            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+                        });
+
+                $("#datetimepicker2")
+                    .on("dp.change",
+                        function (e) {
+                            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+                        });
+            });
+
+            </script>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Gem" class="btn btn-default" />
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 }
 
