@@ -169,5 +169,15 @@ namespace Booking.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult InviteUsers(List<String> users, int bookingId)
+        {
+            var selectedUsers = new List<User>();
+            
+            users?.ForEach(x => selectedUsers.Add(new User { Id = x }));
+ 
+            return View();
+        }
     }
 }

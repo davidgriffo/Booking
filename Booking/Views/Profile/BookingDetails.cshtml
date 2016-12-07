@@ -23,21 +23,35 @@
 
         <dd>
             @Html.DisplayFor(model => model.Booking.ToDate)
-        </dd>
-        <dd>
-            <div class="form-group">
-                @Html.Label("Vælg personer som skal inviteres", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.ListBox("users", new MultiSelectList(Model.Users, "Id", "FirstName"), new { @class = "js-example-basic-multiple js-states form-control", multiple = "multiple" })
-                </div>
-            </div>
-            <script type="text/javascript">
-            $(".js-example-basic-multiple").select2();
-            </script>
+
         </dd>
 
+
+
+
     </dl>
+
 </div>
+@using (Html.BeginForm("InviteUsers", "Profile"))
+{
+    @Html.Hidden("bookingId", Model.Booking.Id)
+    <div class="form-group">
+        @Html.Label("Inviter personer", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.ListBox("users", new MultiSelectList(Model.Users, "id", "FirstName"), new {@class = "js-example-basic-multiple js-states form-control", multiple = "multiple"})
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(".js-example-basic-multiple").select2();
+    </script>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Inviter" id="btnSearch" class="btn btn-default" />
+        </div>
+    </div>
+}
+                      
 <p>
     @Html.ActionLink("Ændre", "EditBooking", new {
     id = Model.Booking.Id
