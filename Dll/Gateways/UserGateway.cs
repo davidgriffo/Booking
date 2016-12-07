@@ -37,5 +37,10 @@ namespace Dll.Gateways {
             HttpResponseMessage response = client.GetAsync($"{ApiRef}/GetBookingsForUser").Result;
             return response.IsSuccessStatusCode ? response.Content.ReadAsAsync<List<Booking>>().Result : null;
         }
+
+        protected override List<Booking> GetInvitesForUser(HttpClient client) {
+            HttpResponseMessage response = client.GetAsync($"{ApiRef}/GetInvitesForUser").Result;
+            return response.IsSuccessStatusCode ? response.Content.ReadAsAsync<List<Booking>>().Result : null;
+        }
     }
 }

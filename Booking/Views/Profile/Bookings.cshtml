@@ -30,11 +30,20 @@
                             right: ''
                         },
                         defaultView: "agendaWeek",
-                        events: '/Profile/GetBookings',
                         axisFormat: 'HH:mm',
                         timeFormat: 'HH:mm',
                         slotLabelFormat: "HH:mm",
-                        allDaySlot: false
+                        allDaySlot: false,
+                        eventSources: [
+                            {
+                                url: '/Profile/GetBookings', // use the `url` property
+                                color: '#00406f' // an option!
+                            },
+                            {
+                                url: '/Profile/GetInvites', // use the `url` property
+                                color: '#c00d0d' // an option!
+                            }
+                        ]
                     });
             });
     </script>
