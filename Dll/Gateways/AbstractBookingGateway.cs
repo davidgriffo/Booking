@@ -19,5 +19,16 @@ namespace Dll.Gateways {
                 InviteUsers(client, booking, users);
             }
         }
+
+        protected abstract void RemoveInvite(HttpClient client, int bookingId);
+
+        public void RemoveInvite(int bookingId) {
+            using (var client = new HttpClient()) {
+                SetupClient(client);
+                AddAuthorizationHeader(client);
+
+                RemoveInvite(client, bookingId);
+            }
+        }
     }
 }

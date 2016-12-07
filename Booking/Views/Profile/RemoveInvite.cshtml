@@ -1,14 +1,13 @@
 ﻿@model Dll.Entities.Booking
 
 @{
-    ViewBag.Title = "Slet booking";
+    ViewBag.Title = "Fjern invitation";
 }
 
-<h2>Slet booking</h2>
+<h2>Fjern invitation</h2>
 
-<h3>Er du sikke på du vil slette denne booking?</h3>
+<h3>Er du sikker på du vil fjerne denne invitation?</h3>
 <div>
-    <h4>Booking</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -33,7 +32,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Slet" class="btn btn-default" /> |
+            <input type="submit" value="Fjern" class="btn btn-default" /> |
             @Html.ActionLink("Tilbage til oversigt", "Bookings")
         </div>
     }

@@ -188,6 +188,7 @@
     <Compile Include="Models\BookRoomViewModel.cs" />
     <Compile Include="Models\EditBookingViewModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\ProfileBookingsViewModel.cs" />
     <Compile Include="Models\RoomBookingViewModel.cs" />
     <Compile Include="Models\RoomEquipmentViewModels.cs" />
     <Compile Include="Models\UsersBookingViewModel.cs" />
@@ -352,6 +353,7 @@
     <Content Include="Views\Profile\BookingDetails.cshtml" />
     <Content Include="Views\Profile\DeleteBooking.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Profile\RemoveInvite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

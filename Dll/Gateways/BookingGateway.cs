@@ -38,5 +38,9 @@ namespace Dll.Gateways {
         protected override void InviteUsers(HttpClient client, Booking booking, List<User> users) {
             HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}/InviteUsers?id={booking.Id}", users).Result;
         }
+
+        protected override void RemoveInvite(HttpClient client, int bookingId) {
+            HttpResponseMessage response = client.PutAsJsonAsync($"{ApiRef}/RemoveInvite?id={bookingId}", new {}).Result;
+        }
     }
 }

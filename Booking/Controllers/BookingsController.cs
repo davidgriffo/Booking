@@ -13,31 +13,25 @@ using Dll.Entities;
 using Dll.Gateways;
 
 
-namespace Booking.Controllers
-{
+namespace Booking.Controllers {
     [RequireAdmin]
-    public class BookingsController : Controller
-    {
+    public class BookingsController : Controller {
         private readonly IGateway<Dll.Entities.Booking, int> _bookingGateway = new DllFacade().GetBookingGateway();
         private IAccountGateway _accountGateway = new DllFacade().GetAccountGateway();
 
         // GET: Bookings
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             return View(_bookingGateway.Read());
         }
 
         // GET: Bookings/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
+        public ActionResult Details(int? id) {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var booking = _bookingGateway.Read(id.Value);
 
-            if (booking == null)
-            {
+            if (booking == null) {
                 return HttpNotFound();
             }
 
@@ -45,8 +39,7 @@ namespace Booking.Controllers
         }
 
         // GET: Bookings/Create
-        public ActionResult Create()
-        {
+        public ActionResult Create() {
             return View();
         }
 
@@ -55,10 +48,8 @@ namespace Booking.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FromDate,ToDate")] Dll.Entities.Booking booking)
-        {
-            if (ModelState.IsValid)
-            {
+        public ActionResult Create([Bind(Include = "Id,FromDate,ToDate")] Dll.Entities.Booking booking) {
+            if (ModelState.IsValid) {
                 _bookingGateway.Create(booking);
 
                 return RedirectToAction("Index");
@@ -68,16 +59,13 @@ namespace Booking.Controllers
         }
 
         // GET: Bookings/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
+        public ActionResult Edit(int? id) {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var booking = _bookingGateway.Read(id.Value);
-            
-            if (booking == null)
-            {
+
+            if (booking == null) {
                 return HttpNotFound();
             }
             return View(booking);
@@ -88,10 +76,9 @@ namespace Booking.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FromDate,ToDate")] Dll.Entities.Booking booking, string startDate, string endDate)
-        {
-            if (ModelState.IsValid)
-            {
+        public ActionResult Edit([Bind(Include = "Id,FromDate,ToDate")] Dll.Entities.Booking booking, string startDate,
+            string endDate) {
+            if (ModelState.IsValid) {
                 var bookingToUpdate = _bookingGateway.Read(booking.Id);
                 DateTimeFormatInfo dk = new CultureInfo("da-DK", false).DateTimeFormat;
                 bookingToUpdate.FromDate = Convert.ToDateTime(startDate, dk);
@@ -104,17 +91,14 @@ namespace Booking.Controllers
         }
 
         // GET: Bookings/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
+        public ActionResult Delete(int? id) {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             var booking = _bookingGateway.Read(id.Value);
 
-            if (booking == null)
-            {
+            if (booking == null) {
                 return HttpNotFound();
             }
             return View(booking);
@@ -123,8 +107,7 @@ namespace Booking.Controllers
         // POST: Bookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
+        public ActionResult DeleteConfirmed(int id) {
             _bookingGateway.Delete(id);
 
             return RedirectToAction("Index");

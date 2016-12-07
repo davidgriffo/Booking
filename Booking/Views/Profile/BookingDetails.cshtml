@@ -38,7 +38,7 @@
     <div class="form-group">
         @Html.Label("Inviter personer", htmlAttributes: new {@class = "control-label col-md-2"})
         <div class="col-md-10">
-            @Html.ListBox("users", new MultiSelectList(Model.Users, "id", "FirstName"), new {@class = "js-example-basic-multiple js-states form-control", multiple = "multiple"})
+            @Html.ListBox("selectedUsers", new MultiSelectList(Model.Users, "id", "FirstName", Model.SelectedIds), new {@class = "js-example-basic-multiple js-states form-control", multiple = "multiple"})
         </div>
     </div>
     <script type="text/javascript">

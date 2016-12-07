@@ -85,7 +85,6 @@ namespace Booking.Controllers {
                 bool response = _accountGateway.Register(user, model.Password);
 
                 if (response) {
-                    _accountGateway.Login(model.Email, model.Password);
                     return RedirectToAction("Index");
                 } else
                     ModelState.AddModelError("", "Error registering new user");

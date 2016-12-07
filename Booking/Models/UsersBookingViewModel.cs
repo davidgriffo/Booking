@@ -10,5 +10,6 @@ namespace Booking.Models
     {
         public Dll.Entities.Booking Booking { get; set; }
         public List<User> Users { get; set; }
+        public List<string> SelectedIds { get; set; }
     }
 }

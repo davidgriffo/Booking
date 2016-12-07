@@ -62,7 +62,9 @@ namespace Booking.Controllers {
 
         public ActionResult Bookings() {
             var bookings = _userGateway.GetBookingsForUser();
-            return View(bookings);
+            var invites = _userGateway.GetInvitesForUser();
+            var model = new ProfileBookingsViewModel {Bookings = bookings, Invites = invites};
+            return View(model);
         }
 
         public JsonResult GetBookings() {
@@ -138,21 +140,25 @@ namespace Booking.Controllers {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var model = new UsersBookingViewModel {
-                Users = _userGateway.Read(),
-                Booking = _bookingGateway.Read(id.Value)
-            };
-
-
-/**/
             var booking = _bookingGateway.Read(id.Value);
 
             if (booking == null) {
                 return HttpNotFound();
             }
+
+            var selectedIds = new List<string>();
+            booking.Invited.ForEach(x => selectedIds.Add(x.Id));
+
+            var model = new UsersBookingViewModel {
+                Users = _userGateway.Read(),
+                Booking = _bookingGateway.Read(id.Value),
+                SelectedIds = selectedIds
+            };
+
             if (_accountGateway.GetUserLoggedIn().IsSuperAdmin) {
                 return View(model);
-            } else if (_accountGateway.GetUserLoggedIn().Id == booking.Creator.Id) {
+            }
+            if (_accountGateway.GetUserLoggedIn().Id == booking.Creator.Id) {
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -183,18 +189,44 @@ namespace Booking.Controllers {
         public ActionResult DeleteConfirmed(int id) {
             _bookingGateway.Delete(id);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Bookings");
         }
 
         [HttpPost]
-        public ActionResult InviteUsers(List<String> users, int bookingId) {
-            var selectedUsers = new List<User>();
-            users?.ForEach(x => selectedUsers.Add(new User {Id = x}));
+        public ActionResult InviteUsers(List<string> selectedUsers, int bookingId) {
+            var users = new List<User>();
+            selectedUsers?.ForEach(x => users.Add(new User {Id = x}));
 
-            var booking = _bookingGateway.Read(bookingId);
-            _bookingGateway.InviteUsers(booking, selectedUsers);
+            var bookingRead = _bookingGateway.Read(bookingId);
+            _bookingGateway.InviteUsers(bookingRead, users);
 
-            return RedirectToAction("BookingDetails", new {Id = booking.Id});
+            return RedirectToAction("Bookings");
         }
+
+        // GET: profile/RemoveInvite/5
+        public ActionResult RemoveInvite(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var booking = _bookingGateway.Read(id.Value);
+
+            if (booking == null) {
+                return HttpNotFound();
+            }
+            return View(booking);
+        }
+
+        // POST: profile/RemoveInvite/5
+        [HttpPost, ActionName("RemoveInvite")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveInviteConfirm(int id) {
+            // DO SOMETHING HERE TO MAKE THINGS WORK
+
+            _bookingGateway.RemoveInvite(id);
+
+            return RedirectToAction("Bookings");
+        }
+
     }
 }
