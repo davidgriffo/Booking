@@ -109,7 +109,6 @@ namespace Booking.Controllers
         public ActionResult EditBooking([Bind(Include = "Id,FromDate,ToDate")] Dll.Entities.Booking booking) {
             if (ModelState.IsValid) {
                 _bookingGateway.Update(booking);
-
                 return RedirectToAction("Index");
             }
             return View(booking);
