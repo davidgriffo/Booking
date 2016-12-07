@@ -14,11 +14,11 @@ using Dll.Gateways;
 namespace Booking.Controllers {
     [RequireSuperAdmin]
     public class EquipmentsController : Controller {
-        private IGateway<Equipment, int> _em = new DllFacade().GetEquipmentGateway();
+        private readonly IGateway<Equipment, int> _equipmentGateway = new DllFacade().GetEquipmentGateway();
 
         // GET: Equipments
         public ActionResult Index() {
-            return View(_em.Read());
+            return View(_equipmentGateway.Read().OrderBy(x => x.Name));
         }
 
         // GET: Equipments/Create
@@ -33,7 +33,7 @@ namespace Booking.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description")] Equipment equipment) {
             if (ModelState.IsValid) {
-                _em.Create(equipment);
+                _equipmentGateway.Create(equipment);
 
                 return RedirectToAction("Index");
             }
@@ -46,7 +46,7 @@ namespace Booking.Controllers {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var equipment = _em.Read(id.Value);
+            var equipment = _equipmentGateway.Read(id.Value);
 
             if (equipment == null) {
                 return HttpNotFound();
@@ -61,7 +61,7 @@ namespace Booking.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description")] Equipment equipment) {
             if (ModelState.IsValid) {
-                _em.Update(equipment);
+                _equipmentGateway.Update(equipment);
 
                 return RedirectToAction("Index");
             }
@@ -73,7 +73,7 @@ namespace Booking.Controllers {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var equipment = _em.Read(id.Value);
+            var equipment = _equipmentGateway.Read(id.Value);
 
             if (equipment == null) {
                 return HttpNotFound();
@@ -85,7 +85,7 @@ namespace Booking.Controllers {
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            _em.Delete(id);
+            _equipmentGateway.Delete(id);
 
             return RedirectToAction("Index");
         }

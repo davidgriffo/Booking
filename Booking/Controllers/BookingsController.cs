@@ -17,13 +17,13 @@ namespace Booking.Controllers
     [RequireAdmin]
     public class BookingsController : Controller
     {
-        private IGateway<Dll.Entities.Booking, int> _bm = new DllFacade().GetBookingGateway();
-        private IAccountGateway _ag = new DllFacade().GetAccountGateway();
+        private readonly IGateway<Dll.Entities.Booking, int> _bookingGateway = new DllFacade().GetBookingGateway();
+        private IAccountGateway _accountGateway = new DllFacade().GetAccountGateway();
 
         // GET: Bookings
         public ActionResult Index()
         {
-            return View(_bm.Read());
+            return View(_bookingGateway.Read());
         }
 
         // GET: Bookings/Details/5
@@ -33,7 +33,7 @@ namespace Booking.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var booking = _bm.Read(id.Value);
+            var booking = _bookingGateway.Read(id.Value);
 
             if (booking == null)
             {
@@ -58,7 +58,7 @@ namespace Booking.Controllers
         {
             if (ModelState.IsValid)
             {
-                _bm.Create(booking);
+                _bookingGateway.Create(booking);
 
                 return RedirectToAction("Index");
             }
@@ -73,7 +73,7 @@ namespace Booking.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var booking = _bm.Read(id.Value);
+            var booking = _bookingGateway.Read(id.Value);
             
             if (booking == null)
             {
@@ -91,7 +91,7 @@ namespace Booking.Controllers
         {
             if (ModelState.IsValid)
             {
-                _bm.Update(booking);
+                _bookingGateway.Update(booking);
 
                 return RedirectToAction("Index");
             }
@@ -106,7 +106,7 @@ namespace Booking.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var booking = _bm.Read(id.Value);
+            var booking = _bookingGateway.Read(id.Value);
 
             if (booking == null)
             {
@@ -120,7 +120,7 @@ namespace Booking.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _bm.Delete(id);
+            _bookingGateway.Delete(id);
 
             return RedirectToAction("Index");
         }

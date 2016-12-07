@@ -18,7 +18,7 @@ namespace Booking.Controllers {
 
         // GET: Departments
         public ActionResult Index() {
-            return View(_departmentGateway.Read());
+            return View(_departmentGateway.Read().OrderBy(x => x.Name));
         }
 
         // GET: Departments/Create

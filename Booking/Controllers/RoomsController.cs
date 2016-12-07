@@ -23,7 +23,7 @@ namespace Booking.Controllers {
 
         // GET: Rooms
         public ActionResult Index() {
-            return View(_roomsGateway.Read());
+            return View(_roomsGateway.Read().OrderBy(x => x.Name));
         }
 
         // GET: Rooms/Details/5

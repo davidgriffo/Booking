@@ -18,7 +18,7 @@ namespace Booking.Controllers {
 
         // GET: Users
         public ActionResult Index() {
-            var model = new UsersViewModel {Users = _userGateway.Read().FindAll(x => x.LockoutEnabled == false)};
+            var model = new UsersViewModel {Users = _userGateway.Read().FindAll(x => x.LockoutEnabled == false).OrderBy(x => x.FirstName).ToList()};
 
             return View(model);
         }
