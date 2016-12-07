@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -91,10 +92,10 @@ namespace Booking.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Husk locale
                 var bookingToUpdate = _bookingGateway.Read(booking.Id);
-                bookingToUpdate.FromDate = Convert.ToDateTime(startDate);
-                bookingToUpdate.ToDate = Convert.ToDateTime(endDate);
+                DateTimeFormatInfo dk = new CultureInfo("da-DK", false).DateTimeFormat;
+                bookingToUpdate.FromDate = Convert.ToDateTime(startDate, dk);
+                bookingToUpdate.ToDate = Convert.ToDateTime(endDate, dk);
                 _bookingGateway.Update(bookingToUpdate);
 
                 return RedirectToAction("Index");
