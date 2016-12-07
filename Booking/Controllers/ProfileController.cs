@@ -120,15 +120,24 @@ namespace Booking.Controllers
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var booking = _bookingGateway.Read(id.Value);
+
+            var model = new UsersBookingViewModel
+            {
+                Users = _userGateway.Read(),
+                Booking = _bookingGateway.Read(id.Value)
+                
+            };
+
+
+/**/            var booking = _bookingGateway.Read(id.Value);
 
             if (booking == null) {
                 return HttpNotFound();
             }
             if (_accountGateway.GetUserLoggedIn().IsSuperAdmin) {
-                return View(booking);
+                return View(model);
             } else if (_accountGateway.GetUserLoggedIn().Id == booking.Creator.Id) {
-                return View(booking);
+                return View(model);
             }
             return RedirectToAction("Index");
         }
