@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -126,10 +127,16 @@ namespace Booking.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditBooking([Bind(Include = "Id,FromDate,ToDate")] Dll.Entities.Booking booking) {
+        public ActionResult EditBooking([Bind(Include = "Id,FromDate,ToDate")] Dll.Entities.Booking booking, string startDate,
+            string endDate) {
             if (ModelState.IsValid) {
-                _bookingGateway.Update(booking);
-                return RedirectToAction("Index");
+                var bookingToUpdate = _bookingGateway.Read(booking.Id);
+                DateTimeFormatInfo dk = new CultureInfo("da-DK", false).DateTimeFormat;
+                bookingToUpdate.FromDate = Convert.ToDateTime(startDate, dk);
+                bookingToUpdate.ToDate = Convert.ToDateTime(endDate, dk);
+                _bookingGateway.Update(bookingToUpdate);
+
+                return RedirectToAction("Bookings");
             }
             return View(booking);
         }
