@@ -224,6 +224,7 @@
     <Content Include="fonts\Exo-Medium.otf" />
     <Content Include="fonts\Exo-Regular-Italic.otf" />
     <Content Include="fonts\Exo-Regular.otf" />
+    <None Include="Properties\PublishProfiles\roomsapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -341,7 +342,6 @@
     <Content Include="Views\SelectedBooking\BookRoom.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Bookings\UserBooking.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\ChangePassword.cshtml" />
     <Content Include="Views\Departments\Create.cshtml" />
