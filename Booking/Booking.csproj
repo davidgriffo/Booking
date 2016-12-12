@@ -201,11 +201,11 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\select2-bootstrap.min.css" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\Style.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="images\book-dit-lokale.png" />
@@ -216,14 +216,17 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="fonts\Exo-Bold.otf" />
-    <Content Include="fonts\Exo-DemiBold-Italic.otf" />
-    <Content Include="fonts\Exo-DemiBold.otf" />
-    <Content Include="fonts\Exo-ExtraBold.otf" />
-    <Content Include="fonts\Exo-Light.otf" />
-    <Content Include="fonts\Exo-Medium.otf" />
-    <Content Include="fonts\Exo-Regular-Italic.otf" />
-    <Content Include="fonts\Exo-Regular.otf" />
+    <Content Include="Fonts\Exo-Bold.otf" />
+    <Content Include="Fonts\Exo-DemiBold-Italic.otf" />
+    <Content Include="Fonts\Exo-DemiBold.otf" />
+    <Content Include="Fonts\Exo-ExtraBold.otf" />
+    <Content Include="Fonts\Exo-Light.otf" />
+    <Content Include="Fonts\Exo-Medium.otf" />
+    <Content Include="Fonts\Exo-Regular-Italic.otf" />
+    <Content Include="Fonts\Exo-Regular.otf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\roomsapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
@@ -314,7 +317,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -359,9 +364,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

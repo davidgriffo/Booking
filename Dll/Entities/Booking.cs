@@ -17,6 +17,5 @@ namespace Dll.Entities
         public Room Room { get; set; }
         public User Creator { get; set; }
         public List<User> Invited { get; set; }
-        public List<User> Accepted { get; set; }
     }
 }

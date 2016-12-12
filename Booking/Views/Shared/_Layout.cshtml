@@ -6,88 +6,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
 
-    
-    <link href="~/Content/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Exo:800" rel="stylesheet" />
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet"/>
+    <link href="~/Content/Style.css" rel="stylesheet"/>
+    <link href="~/Content/Site.css" rel="stylesheet"/>
+
+    <link href="~/Content/select2.min.css" rel="stylesheet"/>
     <script src="~/Scripts/select2.min.js"></script>
-    
+
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
     <script src="~/Scripts/moment.min.js"></script>
 
-    <script type = 'text/javascript' >
-        var appInsights=window.appInsights||function(config)
-        {
-            function r(config){ t[config] = function(){ var i = arguments; t.queue.push(function(){ t[config].apply(t, i)})} }
-            var t = { config:config},u=document,e=window,o='script',s=u.createElement(o),i,f;for(s.src=config.url||'//az416426.vo.msecnd.net/scripts/a/ai.0.js',u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=['Event','Exception','Metric','PageView','Trace','Ajax'];i.length;)r('track'+i.pop());return r('setAuthenticatedUserContext'),r('clearAuthenticatedUserContext'),config.disableExceptionTracking||(i='onerror',r('_'+i),f=e[i],e[i]=function(config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o),s}),t
-        }({
-            instrumentationKey:'f7106b13-ce5e-4eaf-ba7f-32c081f404cd'
-        });
-        
-        window.appInsights=appInsights;
+    @*<script type='text/javascript'>
+        var appInsights = window.appInsights ||
+            function(config) {
+                function r(config) {
+                    t[config] = function() {
+                        var i = arguments;
+                        t.queue.push(function() { t[config].apply(t, i) })
+                    }
+                }
+
+                var t = { config: config }, u = document, e = window, o = 'script', s = u.createElement(o), i, f;
+                for (s.src = config.url || '//az416426.vo.msecnd.net/scripts/a/ai.0.js', u.getElementsByTagName(o)[0]
+                        .parentNode.appendChild(s), t.cookie = u
+                        .cookie, t.queue = [], i = ['Event', 'Exception', 'Metric', 'PageView', 'Trace', 'Ajax'];
+                    i.length;
+                ) r('track' + i.pop());
+                return r('setAuthenticatedUserContext'), r('clearAuthenticatedUserContext'),
+                    config.disableExceptionTracking ||
+                    (i = 'onerror', r('_' + i), f = e[i], e[i] = function(config, r, u, e, o) {
+                        var s = f && f(config, r, u, e, o);
+                        return s !== !0 && t['_' + i](config, r, u, e, o), s
+                    }), t
+            }({
+                instrumentationKey: 'f7106b13-ce5e-4eaf-ba7f-32c081f404cd'
+            });
+
+        window.appInsights = appInsights;
         appInsights.trackPageView();
-    </script>
+    </script>*@
 </head>
 <body>
-    <div class="jumbotron" style="padding-bottom: 150px;">
-        <a href="@Url.Action("Index", "Home")"><img src="~/images/easvsydvest-logo.png" /></a>
-    </div>
-    
-    
- 
-        <div class="navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                @Html.Partial("_LoginPartial")
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Mine bookninger", "Bookings", "Profile")</li>
-                        @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsSuperAdmin)
-                        {
-                            <li>@Html.ActionLink("Lokaler", "Index", "Rooms")</li>
-                            <li>@Html.ActionLink("Udstyr", "Index", "Equipments")</li>
-                            <li>@Html.ActionLink("Afdelinger", "Index", "Departments")</li>
-                            <li>@Html.ActionLink("Bookninger", "Index", "Bookings")</li>
-                            <li>@Html.ActionLink("Brugere", "Index", "Users")</li>
-                        }
-                        
-                        @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsAdmin)
-                        {
-                            <li>@Html.ActionLink("Bookninger", "Index", "Bookings")</li>
-                        }
-                        
-                
-                        
-                   
-                    </ul>
-                </div>
-            </div>
-        </div>
-   
+<div class="jumbotron" style="padding-bottom: 150px;">
+    <a href="@Url.Action("Index", "Home")">
+        <img src="~/images/easvsydvest-logo.png"/>
+    </a>
+</div>
 
-        <div class="container body-content">
-            @RenderBody()
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Pineapple Inc. | Alle rettigheder forbeholdes</p>
-            </footer>
+
+<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </div>
-    
-    
-        @*@Scripts.Render("~/bundles/jquery")*@
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+        @Html.Partial("_LoginPartial")
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Hjem", "Index", "Home")</li>
+                <li>@Html.ActionLink("Mine bookninger", "Bookings", "Profile")</li>
+                @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsSuperAdmin) {
+                    <li>@Html.ActionLink("Lokaler", "Index", "Rooms")</li>
+                    <li>@Html.ActionLink("Udstyr", "Index", "Equipments")</li>
+                    <li>@Html.ActionLink("Afdelinger", "Index", "Departments")</li>
+                    <li>@Html.ActionLink("Bookninger", "Index", "Bookings")</li>
+                    <li>@Html.ActionLink("Brugere", "Index", "Users")</li>
+                }
+
+                @if (new DllFacade().GetAccountGateway().GetUserLoggedIn().IsAdmin) {
+                    <li>@Html.ActionLink("Bookninger", "Index", "Bookings")</li>
+                }
+
+
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="container body-content">
+    @RenderBody()
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Pineapple Inc. | Alle rettigheder forbeholdes</p>
+    </footer>
+</div>
+
+
+@RenderSection("scripts", required: false)
 </body>
 </html>

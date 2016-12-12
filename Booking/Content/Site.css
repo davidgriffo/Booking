@@ -10,7 +10,7 @@ body p b {
 }
 
 body h2 {
-   font-family: 'CustomFont' !important;
+   font-family: 'Exo' !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -66,7 +66,15 @@ footer p {
     padding-top: 15px;
 }
 
-@font-face {
-  font-family: CustomFont;
-  src: url('/fonts/Exo-Bold.otf');
+.searchTarget {
+    height: 45px !important;
+}
+
+.select2-search__field {
+    line-height: 2.1 !important;
+    font-size: 17px !important;
+}
+
+.select2-selection {
+    height: 45px !important;
 }

@@ -33,9 +33,6 @@ namespace Booking.Controllers {
                 } else
                     ModelState.AddModelError("", "Invalid login attempt!");
             }
-
-
-
             return View(model);
         }
 

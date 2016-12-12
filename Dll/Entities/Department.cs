@@ -10,7 +10,5 @@ namespace Dll.Entities {
         public int Id { get; set; }
         [Display(Name = "Afdelings navn")]
         public string Name { get; set; }
-        [Display(Name = "Beskrivelse")]
-        public string Description { get; set; }
     }
 }
