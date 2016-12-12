@@ -11,7 +11,7 @@ using Dll.Entities;
 using Dll.Gateways;
 
 namespace Booking.Controllers {
-    [RequireAdmin]
+    [RequireSuperAdmin]
     public class UsersController : Controller {
         private readonly IGateway<User, String> _userGateway = new DllFacade().GetUserGateway();
         private readonly IAccountGateway _accountGateway = new DllFacade().GetAccountGateway();
