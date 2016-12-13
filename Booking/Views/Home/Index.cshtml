@@ -112,15 +112,7 @@
                         <p>
                             <b>Beskrivelse:</b> @item.Description</p>
                     </div>
-                    <div class="col-md-4">
-                        <p>
-                            <b>Udstyr:</b>
-                        </p>
-                        @foreach (var equipment in item.Equipment) {
-                            <p>@equipment.Name</p>
-                        }
-                    </div>
-                    <div class="col-md-2">
+                    <div class="col-md-6">
                         <button formaction="@Url.Action("BookRoom", "SelectedBooking", new {Id = item.Id})" type="submit" class="glyphicon glyphicon-calendar" id="btnBook"></button>
                     </div>
                 </div>

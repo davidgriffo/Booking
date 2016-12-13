@@ -43,10 +43,9 @@ footer p {
 #btnBook {
     padding: 15px;
     font-size: 20px;
-
-    border-radius: 25px;
     background-color: #00406f;
     color: #FFFFFF;
+    margin-left: 70%;
 }
 
 #roomRow {

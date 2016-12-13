@@ -61,12 +61,6 @@
 
                 $.each(data,
                     function(index, value) {
-                        var item = "";
-                        $.each(value.Equipment,
-                            function(i, v) {
-                                item += '<p>' + v.Name + '<p>';
-                            });
-
                         element.append(
                             '<div class="row" id="roomRow"><div class="col-md-2"><p><b>Lokale:</b>' +
                             value.Name +
@@ -76,9 +70,7 @@
                             value.Capacity +
                             '</p><p><b>Beskrivelse:</b>' +
                             value.Description +
-                            '</p></div><div class="col-md-4"><p><b>Udstyr:</b>' +
-                            item +
-                            '</p></div><div class="col-md-2"> <button formaction="/SelectedBooking/BookRoom/' + value.Id + '" type="submit" id="btnBook" class="glyphicon glyphicon-calendar"></a> </div> </div>'
+                            '</p></div><div class="col-md-6"> <button formaction="/SelectedBooking/BookRoom/' + value.Id + '" type="submit" id="btnBook" class="glyphicon glyphicon-calendar"></a> </div> </div>'
                         );
                     });
             })
